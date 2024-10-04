@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://wvfx1rd4gpap"]
+
+[ext_resource type="PackedScene" uid="uid://c6imy4nxexcqy" path="res://src/background/background.tscn" id="1_2dg8k"]
+[ext_resource type="PackedScene" uid="uid://c77b4mqs3be50" path="res://src/scripts/enemy.tscn" id="2_js7a1"]
+
+[node name="Background" instance=ExtResource("1_2dg8k")]
+
+[node name="Player" parent="." index="0"]
+unique_name_in_owner = true
+
+[node name="Enemy" parent="." index="2" node_paths=PackedStringArray("player") instance=ExtResource("2_js7a1")]
+position = Vector2(715, 207)
+player = NodePath("../Player")

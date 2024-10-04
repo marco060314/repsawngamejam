@@ -1,0 +1,8 @@
+res://src/scripts/Enemy.cs
+res://src/scripts/Player.cs
+res://src/scripts/Entity.cs
+res://src/background/betterBackground.tscn
+res://src/scripts/Bullet.tscn
+res://src/scripts/Bullet.cs
+res://src/scripts/player.tscn
+res://src/scripts/enemy.tscn

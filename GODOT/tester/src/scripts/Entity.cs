@@ -3,11 +3,11 @@ using System;
 
 public partial class Entity : CharacterBody2D
 {
-	// The maximum speed the player can move
+	// The maximum speed the entity can move
 	public float speed = 300.0f;
-	// More friction = player stops faster (10 drift, 20 is practically instant)
+	// More friction = entity stops faster (10 drift, 20 is practically instant)
 	public float friction = 15.0f;
-	// Acceleration for the player
+	// Acceleration for the entity
 	public float acceleration = 23.0f;
 
     public Vector2 direction;
