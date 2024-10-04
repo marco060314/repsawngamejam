@@ -1,4 +1,6 @@
+res://scenes/enemy_test.tscn
 res://src/scripts/player.tscn
-res://src/scripts/Entity.cs
 res://src/background/background.tscn
+res://src/scripts/EnemyTest.cs
+res://src/scripts/Entity.cs
 res://src/scripts/Player.cs
