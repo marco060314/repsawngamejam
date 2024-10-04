@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1728078534
+::res://::1728082864
 README.md::TextFile::-1::1728078445::0::1::::<><>::
 ::res://assets/::1728078535
 icon.svg::CompressedTexture2D::2538053177413455252::1728078445::1728078535::1::::<><>::
@@ -9,10 +9,13 @@ tiles.png::CompressedTexture2D::7197492473570761324::1728078445::1728078535::1::
 ::res://GODOT/tester/::1728076729
 ::res://GODOT/tester/src/::1728076729
 ::res://GODOT/tester/src/scripts/::1728076729
+::res://scenes/::1728081506
+enemy_test.tscn::PackedScene::631007146246291414::1728081506::0::1::::<><>::res://src/scripts/EnemyTest.cs<>uid://w6g0fhqeayfb::::res://assets/player.png
 ::res://src/::1728078445
-::res://src/background/::1728078445
-background.tscn::PackedScene::6965983549475477848::1728078445::0::1::::<><>::uid://dasrwc15atrj5::::res://assets/tiles.png<>uid://c3yifcihef737::::res://src/scripts/player.tscn
-::res://src/scripts/::1728078445
+::res://src/background/::1728081506
+background.tscn::PackedScene::6965983549475477848::1728081506::0::1::::<><>::uid://dasrwc15atrj5::::res://assets/tiles.png<>uid://c3yifcihef737::::res://src/scripts/player.tscn<>uid://i8wuin27igoc::::res://scenes/enemy_test.tscn
+::res://src/scripts/::1728081942
+EnemyTest.cs::CSharpScript::-1::1728081942::0::1::::<>CharacterBody2D<>::
 Entity.cs::CSharpScript::-1::1728078445::0::1::::<>CharacterBody2D<>::
 Player.cs::CSharpScript::-1::1728078445::0::1::::<>CharacterBody2D<>::
-player.tscn::PackedScene::6788168837988963104::1728078445::0::1::::<><>::res://src/scripts/Player.cs<>uid://w6g0fhqeayfb::::res://assets/player.png
+player.tscn::PackedScene::6788168837988963104::1728081506::0::1::::<><>::res://src/scripts/Player.cs<>uid://w6g0fhqeayfb::::res://assets/player.png
