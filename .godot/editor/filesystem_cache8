@@ -1,0 +1,15 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1728021740
+README.md::TextFile::-1::1728021398::0::1::::<><>::
+::res://assets/::1728021398
+icon.svg::CompressedTexture2D::2538053177413455252::1728021398::1728021741::1::::<><>::
+player.png::CompressedTexture2D::1608559491379508363::1728021398::1728021741::1::::<><>::
+tiles.png::CompressedTexture2D::7197492473570761324::1728021398::1728021741::1::::<><>::
+::res://GODOT/::1728021724
+::res://src/::1728021398
+::res://src/background/::1728021398
+background.tscn::PackedScene::6965983549475477848::1728021398::0::1::::<><>::uid://dasrwc15atrj5::::res://assets/tiles.png<>uid://c3yifcihef737::::res://src/scripts/player.tscn
+::res://src/scripts/::1728021398
+Entity.cs::CSharpScript::-1::1728021398::0::1::::<><>::
+Player.cs::CSharpScript::-1::1728021398::0::1::::<><>::
+player.tscn::PackedScene::6788168837988963104::1728021398::0::1::::<><>::res://src/scripts/Player.cs<>uid://w6g0fhqeayfb::::res://assets/player.png
