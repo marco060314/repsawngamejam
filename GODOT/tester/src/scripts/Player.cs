@@ -48,7 +48,7 @@ public partial class Player : Entity
 		var bulletInstance =(Bullet)bulletScene.Instantiate();
 		
 		bulletInstance.Position=start;
-		bulletInstance.setDestination(destination);
+		bulletInstance.setDirection(Position.DirectionTo(destination));
 		bulletInstance.setSpeed(1500f);
 
 		GetParent().AddChild(bulletInstance);

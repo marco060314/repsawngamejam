@@ -3,17 +3,17 @@ using System;
 
 public partial class Bullet : Area2D
 {
-	private Vector2 destination;
+	private Vector2 direction;
 	private float speed;
 	private Vector2 velocity;
 	private readonly int OUT_OF_BOUNDS=5000;
 	public Bullet(){
-		destination=new Vector2(0,0);
+		direction=new Vector2(0,0);
 		speed=10;
 	}
 
-	public void setDestination(Vector2 position){
-		this.destination=position;
+	public void setDirection(Vector2 direction){
+		this.direction=direction;
 	}
 	public void setSpeed(float speed){
 		this.speed=speed;
@@ -22,7 +22,7 @@ public partial class Bullet : Area2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		velocity = Position.DirectionTo(destination) * speed;
+		velocity = direction * speed;
 		GD.Print(velocity);
 	}
 

@@ -6,3 +6,4 @@ res://src/scripts/Bullet.tscn
 res://src/scripts/Bullet.cs
 res://src/scripts/player.tscn
 res://src/scripts/enemy.tscn
+res://src/background/background.tscn
