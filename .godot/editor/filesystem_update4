@@ -1,6 +1,10 @@
-res://src/scripts/player.tscn
+res://scenes/ranged_enemy_test.tscn
+res://scenes/RangedEnemyTest.cs
 res://src/background/background.tscn
+res://src/scripts/RangedEnemyTest.cs
+res://src/scripts/player.tscn
 res://scenes/enemy_test.tscn
 res://src/scripts/EnemyTest.cs
 res://src/scripts/Player.cs
 res://src/scripts/Entity.cs
+res://src/scripts/EnemyRDetection.cs

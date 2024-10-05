@@ -88,19 +88,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Owen\\.nuget\\packages\\": {}
+    "C:\\Users\\conne\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Owen\\Documents\\GitHub\\repsawngamejam\\Tester.csproj",
+      "projectUniqueName": "C:\\Users\\conne\\Documents\\GitHub\\repsawngamejam\\Tester.csproj",
       "projectName": "Tester",
-      "projectPath": "C:\\Users\\Owen\\Documents\\GitHub\\repsawngamejam\\Tester.csproj",
-      "packagesPath": "C:\\Users\\Owen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Owen\\Documents\\GitHub\\repsawngamejam\\.godot\\mono\\temp\\obj\\",
+      "projectPath": "C:\\Users\\conne\\Documents\\GitHub\\repsawngamejam\\Tester.csproj",
+      "packagesPath": "C:\\Users\\conne\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\conne\\Documents\\GitHub\\repsawngamejam\\.godot\\mono\\temp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Owen\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\conne\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
