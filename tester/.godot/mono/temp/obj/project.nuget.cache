@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "sc/3dWFr3+VmK/YxHcDc9bWtLclpgDwiu1tyLKA+40xpLhyq1VEFCfJwlwNTsHvXHnAKURVFzUKqdaY8DDQgVg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\nickm\\Documents\\GoDot\\repsawngamejam-isaac\\tester\\Tester.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\nickm\\.nuget\\packages\\godot.sourcegenerators\\4.3.0\\godot.sourcegenerators.4.3.0.nupkg.sha512",
+    "C:\\Users\\nickm\\.nuget\\packages\\godotsharp\\4.3.0\\godotsharp.4.3.0.nupkg.sha512",
+    "C:\\Users\\nickm\\.nuget\\packages\\godotsharpeditor\\4.3.0\\godotsharpeditor.4.3.0.nupkg.sha512"
+  ],
+  "logs": []
+}
