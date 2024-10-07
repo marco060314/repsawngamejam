@@ -13,3 +13,5 @@ res://src/scripts/MainMenu.cs
 res://src/scripts/MenuBtn.cs
 res://src/scripts/GameOver.cs
 res://src/background/gameover.tscn
+res://src/scripts/Title1.cs
+res://src/scripts/Title2.cs

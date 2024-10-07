@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://couql85vkk7de"]
+[gd_scene load_steps=11 format=3 uid="uid://couql85vkk7de"]
 
 [ext_resource type="Script" path="res://src/scripts/Menu.cs" id="1_5cq35"]
 [ext_resource type="Texture2D" uid="uid://bgh1q75m1dnow" path="res://assets/menu2.png" id="1_aukg8"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://d1d2144172rs5" path="res://assets/startbutton.png" id="2_y2pdd"]
 [ext_resource type="Texture2D" uid="uid://dw4tad1b7t2fh" path="res://assets/startclicked.png" id="3_ligy7"]
 [ext_resource type="Script" path="res://src/scripts/Start.cs" id="4_kb8fy"]
+[ext_resource type="Texture2D" uid="uid://cou8iyxybe0t1" path="res://assets/title1.png" id="7_g0nif"]
+[ext_resource type="Script" path="res://src/scripts/Title1.cs" id="8_es18s"]
+[ext_resource type="Texture2D" uid="uid://d036rdrpbw5em" path="res://assets/title2.png" id="9_5c7rw"]
+[ext_resource type="Script" path="res://src/scripts/Title2.cs" id="10_ue8a3"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -40,20 +44,16 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_aukg8")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = 581.0
-offset_top = 166.0
-offset_right = 701.0
-offset_bottom = 206.0
-text = "FISH SHOOTER"
-
 [node name="DifficultySelector" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 257.0
-offset_top = 225.0
-offset_right = 392.0
-offset_bottom = 329.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.182
+anchor_top = 0.72
+anchor_right = 0.216
+anchor_bottom = 0.72
+offset_top = -104.0
+offset_right = 135.0
+grow_vertical = 0
 script = ExtResource("2_l8u8t")
 
 [node name="Easy" type="CheckButton" parent="DifficultySelector"]
@@ -72,15 +72,32 @@ mouse_default_cursor_shape = 2
 text = "Hard"
 
 [node name="TextureButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 841.0
-offset_top = 227.0
-offset_right = 941.0
-offset_bottom = 277.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.773
+anchor_top = 0.72
+anchor_right = 0.773
+anchor_bottom = 0.72
+offset_left = -100.0
+offset_top = -50.0
+grow_horizontal = 0
+grow_vertical = 0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("2_y2pdd")
 texture_pressed = ExtResource("3_ligy7")
 script = ExtResource("4_kb8fy")
+
+[node name="title1" type="Sprite2D" parent="."]
+position = Vector2(-100, 220)
+scale = Vector2(0.6, 0.59)
+texture = ExtResource("7_g0nif")
+script = ExtResource("8_es18s")
+
+[node name="title2" type="Sprite2D" parent="."]
+position = Vector2(1440, 226)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("9_5c7rw")
+script = ExtResource("10_ue8a3")
 
 [connection signal="toggled" from="DifficultySelector/Easy" to="DifficultySelector" method="onEasyToggled"]
 [connection signal="toggled" from="DifficultySelector/Medium" to="DifficultySelector" method="onMediumToggled"]
