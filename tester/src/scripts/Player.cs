@@ -14,79 +14,69 @@ using System;
 public partial class Player : Entity {
 	private const float TOLERANCE = 0.05f; // Controller deadzone
 
-	[Export] private bool isPlayerOne;
-	[Export] private bool isPlayerTwo;
-	[Export] private Bullet bullet;
-	[Export] private Gun gun;
+	[Export] public bool isPlayerOne;
+	[Export] public bool isPlayerTwo;
+	//[Export] private PackedScene WeaponScene;
+	[Export] private Weapon weapon;
 
 	private Vector2 rotationVector;
 
-	public Player() : base(300f, 15f, 23f, 100f){
+	public Player() : base(300f, 15f, 23f, 100f) {
 		// damage, attackSpeed, bulletSpeed, spread (in degrees)
-		gun = new Gun();
-		gun.setDamage(10);
-		gun.setAttackSpeed(0.5f);
-		gun.setBulletSpeed(500);
-		gun.setSpread(0);
 	}
 
-	public override void _Ready(){
-		// runs once after the node is added to the scene
-		
-		if (isPlayerOne){
-			Position = new Vector2(320, 240);  // Player 1 starting position
+	public override void _Ready() {
+		//if (WeaponScene != null) {
+			// weapon = WeaponScene.Instantiate<Weapon>();
+			// AddChild(weapon);
+			
+		if (isPlayerOne && !isPlayerTwo) {
+			weapon.EquipGun();
+			GD.Print("Player 1 has been assigned a gun");
+		} else if (isPlayerTwo && !isPlayerOne) {
+			weapon.EquipShield();
+			GD.Print("Player 2 has been assigned a shield");
 		}
-		else if (isPlayerTwo){
-			Position = new Vector2(960, 240);  // Player 2 starting position
-		}
+		//}
 
 		base._Ready();
 	}
 
-	public override void _PhysicsProcess(double delta){
-		if (isPlayerOne){
+	public override void _PhysicsProcess(double delta) {
+		if (isPlayerOne) {
 			// Handle movement
 			direction = Input.GetVector("LEFT", "RIGHT", "UP", "DOWN");
-
+			weapon.EquipGun();
 			// Rotate towards the mouse
 			Vector2 mousePosition = GetGlobalMousePosition();
-			rotationVector = mousePosition - position;
-			rotationVector = rotationVector.Normalized();
+			rotationVector = (mousePosition - position).Normalized();
 			Rotation = (mousePosition - GlobalPosition).Angle() + Mathf.Pi / 2;
-
 		}
-		else if (isPlayerTwo){
+		else if (isPlayerTwo) {
 			// Handle movement
 			direction = Input.GetVector("P2_LEFT", "P2_RIGHT", "P2_UP", "P2_DOWN");
 
 			// Use the right joystick for Player 2 rotation
 			Vector2 rightStickDirection = new Vector2(
-					Input.GetAxis("P2_LOOK_LEFT", "P2_LOOK_RIGHT"),  // X-axis: left and right
-					Input.GetAxis("P2_LOOK_UP", "P2_LOOK_DOWN")      // Y-axis: up and down
+				Input.GetAxis("P2_LOOK_LEFT", "P2_LOOK_RIGHT"),
+				Input.GetAxis("P2_LOOK_UP", "P2_LOOK_DOWN")
 			);
 
 			// If the right joystick is moved beyond the tolerance threshold
 			if (rightStickDirection.Length() > TOLERANCE) {
-				rightStickDirection = rightStickDirection.Normalized(); // Normalize direction
+				rightStickDirection = rightStickDirection.Normalized();
 				Rotation = rightStickDirection.Angle() + Mathf.Pi / 2;
-				rotationVector = rightStickDirection;  // Update rotation vector for shooting direction
+				rotationVector = rightStickDirection;
 			}
 
-			// Example shooting for Player 2 (You can add the controller button to shoot here)
-			// if (Input.IsActionJustPressed("P2_SHOOT")) {
-			//     Shoot(rotationVector, gun.getBulletSpeed());
-			// }
+			if (Input.IsActionJustPressed("P2_RIGHT_TRIGGER") && weapon != null) {
+				weapon.ActivateWeapon(rotationVector);
+			}
 		}
 
-		// Call base method to process movement and physics
 		base._PhysicsProcess(delta);
 	}
-
-	/**
-	 * Shoots a bullet in the direction of the given vector.
-	 * @param dir The direction to shoot the bullet in.
-	 */
-
+	
 	// Getter methods
 	public Vector2 getPosition(){
 		return position;
@@ -103,4 +93,5 @@ public partial class Player : Entity {
 	public Vector2 getRotationVector(){
 		return rotationVector;
 	}
+	
 }
