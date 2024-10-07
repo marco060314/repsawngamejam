@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxjh82on0sud"]
+
+[ext_resource type="Texture2D" uid="uid://84o3vltvc260" path="res://assets/gun.png" id="1_cc6t6"]
+[ext_resource type="Script" path="res://src/scripts/Gun.cs" id="1_d26e1"]
+[ext_resource type="PackedScene" uid="uid://d0cbjtpas6fom" path="res://src/scripts/Bullet.tscn" id="2_ecfnm"]
+
+[node name="Gun" type="Node2D"]
+script = ExtResource("1_d26e1")
+BulletScene = ExtResource("2_ecfnm")
+
+[node name="Gun_sprite" type="Sprite2D" parent="."]
+position = Vector2(0, 9.58)
+scale = Vector2(0.445, 0.445)
+texture = ExtResource("1_cc6t6")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+autostart = true
