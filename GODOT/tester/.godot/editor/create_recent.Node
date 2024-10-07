@@ -1,3 +1,12 @@
+TextureButton
+Button
+VBoxContainer
+CheckButton
+RichTextLabel
+NinePatchRect
+ColorRect
+Panel
+GridContainer
 Area2D
 CollisionShape2D
 Sprite2D
