@@ -1,11 +1,13 @@
 using Godot;
 using System;
 
-public partial class Start : TextureButton
+public partial class BetterBackground : Node2D
 {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		var click=ResourceLoader.Load("res://assets/cursorclicked.png");
+		Input.SetCustomMouseCursor(click,Input.CursorShape.PointingHand);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

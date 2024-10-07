@@ -3,6 +3,10 @@ using System;
 
 public partial class Player : Entity
 {
+
+    [Signal]
+    public delegate void gameOverEventHandler();
+
 	private PackedScene bulletScene;
 	private double lastShot;
 	private bool autofire;
@@ -22,6 +26,9 @@ public partial class Player : Entity
 		}
 	}
 
+	public void die() {
+		GetTree().ChangeSceneToFile("res://src/background/gameover.tscn");
+	}
 
 	public override void _Input(InputEvent @event)
 	{

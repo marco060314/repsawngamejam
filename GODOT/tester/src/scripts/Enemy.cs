@@ -24,5 +24,6 @@ public CharacterBody2D player;
 		Vector2 position=player.Position;
 		updateDirection(new Vector2(position.X-Position.X,position.Y-Position.Y));
 		base._PhysicsProcess(delta);
+		checkCollision(delta);
 	}
 }

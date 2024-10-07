@@ -6,3 +6,10 @@ res://src/scripts/Entity.cs
 res://src/scripts/Start.cs
 res://src/scripts/Menu.cs
 res://src/scripts/DifficultySelector.cs
+res://src/background/betterBackground.tscn
+res://src/scripts/BetterBackground.cs
+res://src/scripts/Restart.cs
+res://src/scripts/MainMenu.cs
+res://src/scripts/MenuBtn.cs
+res://src/scripts/GameOver.cs
+res://src/background/gameover.tscn

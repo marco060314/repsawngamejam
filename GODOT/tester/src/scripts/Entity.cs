@@ -44,16 +44,18 @@ public partial class Entity : CharacterBody2D
 		{
 			velocity = velocity.Normalized() *speed;
 		}
-
-		// Using MoveAndCollide to see what we collided with.
-		var collision = MoveAndCollide(Velocity * (float)delta);
-		if (collision != null)
-		{
-			GD.Print("I collided with ", ((Node)collision.GetCollider()).Name);
-		}
-
 		Velocity = velocity;
 		MoveAndSlide();
+	}
+
+	public void checkCollision(double delta){
+		for (int i = 0; i < GetSlideCollisionCount(); i++)
+		{
+			var collision = GetSlideCollision(i).GetCollider();
+			if(collision.GetType()==typeof(Player)){
+				((Player)collision).die();
+			}
+		}
 	}
 
 }
