@@ -6,6 +6,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_0b3ol"]
 
 [node name="Bullet" type="Area2D"]
+position = Vector2(-9, -15)
+collision_layer = 3
 script = ExtResource("1_td50v")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

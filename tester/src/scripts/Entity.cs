@@ -57,7 +57,7 @@ public partial class Entity : CharacterBody2D
 		// Stop the player from moving diagonally faster than intended.
 		if (velocity.Length() > speed)
 		{
-			velocity = velocity.Normalized() *speed;
+			velocity = velocity.Normalized() * speed;
 		}
 
 		// Using MoveAndCollide to see what we collided with.

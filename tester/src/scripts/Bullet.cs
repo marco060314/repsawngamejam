@@ -9,7 +9,7 @@ public partial class Bullet : Area2D{
 	private readonly int OUT_OF_BOUNDS = 2000;
 
 	public Bullet(){
-		direction = new Vector2(0,0);
+		direction = new Vector2(0, 0);
 		speed = 10;
 	}
 
@@ -17,20 +17,22 @@ public partial class Bullet : Area2D{
 		this.direction = direction;
 	}
 	public void setSpeed(float speed){
-		this.speed=speed;
+		this.speed = speed;
 	}
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		velocity = direction * speed;
+		this.TopLevel = true;
+		velocity.X = direction.X * speed;
+		velocity.Y = direction.Y * speed;
 		GD.Print(this.Name);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		Translate(velocity * (float)delta);
+		Translate(velocity * (float) delta);
 		if (Position.X > OUT_OF_BOUNDS || Position.Y > OUT_OF_BOUNDS || Position.X < -OUT_OF_BOUNDS || Position.Y < -OUT_OF_BOUNDS){
 			QueueFree();
 		}
