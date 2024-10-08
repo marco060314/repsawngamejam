@@ -11,11 +11,11 @@
 [ext_resource type="Texture2D" uid="uid://d0ckdwynmnksk" path="res://assets/over.png" id="7_yiduc"]
 [ext_resource type="Texture2D" uid="uid://dt6aetkjb1q5l" path="res://assets/energyOver.png" id="8_5hnd3"]
 [ext_resource type="Texture2D" uid="uid://bxvsn7eokecc7" path="res://assets/fantasy/fantasy_ [version 2.0]/swamp_/swamp_.png" id="9_fn26s"]
-[ext_resource type="Script" path="res://src/scripts/P1HealthBar.cs" id="10_4oehy"]
+[ext_resource type="Script" path="res://src/scripts/HealthBar.cs" id="9_tkymf"]
 [ext_resource type="Texture2D" uid="uid://bq7jcoxe4qesk" path="res://assets/seaweedss.png" id="10_kwf2s"]
-[ext_resource type="Script" path="res://src/scripts/P1EnergyBar.cs" id="12_j86it"]
-[ext_resource type="Script" path="res://src/scripts/P2HealthBar.cs" id="13_k6kop"]
-[ext_resource type="Script" path="res://src/scripts/P2EnergyBar.cs" id="14_rbbxb"]
+[ext_resource type="Script" path="res://src/scripts/EnergyBar.cs" id="11_byhw3"]
+[ext_resource type="Script" path="res://src/scripts/Round.cs" id="15_66lgg"]
+[ext_resource type="Script" path="res://src/scripts/EnemiesLeft.cs" id="16_2ursw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_m4jjj"]
 friction = 0.0
@@ -362,7 +362,7 @@ layout_mode = 2
 value = 80.0
 texture_under = ExtResource("6_vpyty")
 texture_progress = ExtResource("7_yiduc")
-script = ExtResource("10_4oehy")
+script = ExtResource("9_tkymf")
 
 [node name="HEnergy" type="HBoxContainer" parent="Camera/Control/Stats/P1Stats"]
 layout_mode = 2
@@ -386,7 +386,7 @@ layout_mode = 2
 value = 80.0
 texture_under = ExtResource("6_vpyty")
 texture_progress = ExtResource("8_5hnd3")
-script = ExtResource("12_j86it")
+script = ExtResource("11_byhw3")
 
 [node name="P2Stats" type="GridContainer" parent="Camera/Control/Stats"]
 layout_mode = 2
@@ -423,7 +423,7 @@ layout_mode = 2
 value = 80.0
 texture_under = ExtResource("6_vpyty")
 texture_progress = ExtResource("7_yiduc")
-script = ExtResource("13_k6kop")
+script = ExtResource("9_tkymf")
 
 [node name="HEnergy" type="HBoxContainer" parent="Camera/Control/Stats/P2Stats"]
 layout_mode = 2
@@ -447,7 +447,43 @@ layout_mode = 2
 value = 80.0
 texture_under = ExtResource("6_vpyty")
 texture_progress = ExtResource("8_5hnd3")
-script = ExtResource("14_rbbxb")
+script = ExtResource("11_byhw3")
+
+[node name="GridContainer" type="GridContainer" parent="Camera/Control"]
+layout_mode = 0
+offset_left = 426.0
+offset_top = -344.0
+offset_right = 626.0
+offset_bottom = -294.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera/Control/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera/Control/GridContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Round" type="RichTextLabel" parent="Camera/Control/GridContainer/VBoxContainer/HBoxContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = "Round: "
+script = ExtResource("15_66lgg")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Camera/Control/GridContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EnemiesLeft" type="RichTextLabel" parent="Camera/Control/GridContainer/VBoxContainer/HBoxContainer2"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = "Enemies Left: "
+script = ExtResource("16_2ursw")
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -1
