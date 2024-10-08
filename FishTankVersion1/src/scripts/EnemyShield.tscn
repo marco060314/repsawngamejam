@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0ordm8ahgwjm"]
-
-[ext_resource type="PackedScene" uid="uid://cnxomk56ub8tl" path="res://src/scripts/BaseShield.tscn" id="1_128x6"]
-[ext_resource type="Script" path="res://src/scripts/EnemyShield.cs" id="2_3ln4w"]
-
-[node name="EnemyShield" instance=ExtResource("1_128x6")]
-script = ExtResource("2_3ln4w")
