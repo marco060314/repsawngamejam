@@ -59,7 +59,7 @@ public partial class Player : Entity {
 			}
 
 			// Shoot if left mouse is pressed
-			if (Input.IsActionJustPressed("MOUSELEFTCLICK") && gun != null) {
+			if (Input.IsActionPressed("MOUSELEFTCLICK") && gun != null) {
 				gun.Shoot(rotationVector);
 			}
 
@@ -98,7 +98,7 @@ public partial class Player : Entity {
 
 		base._PhysicsProcess(delta);
 	}
-	
+
 	// Getter methods
 	public Vector2 getPosition(){
 		return position;
