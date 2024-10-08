@@ -454,7 +454,7 @@ layout_mode = 0
 offset_left = 426.0
 offset_top = -344.0
 offset_right = 626.0
-offset_bottom = -294.0
+offset_bottom = -284.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Camera/Control/GridContainer"]
 layout_mode = 2
@@ -468,7 +468,7 @@ size_flags_vertical = 3
 [node name="Round" type="RichTextLabel" parent="Camera/Control/GridContainer/VBoxContainer/HBoxContainer"]
 clip_contents = false
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Round: "
 script = ExtResource("15_66lgg")
@@ -480,7 +480,7 @@ size_flags_vertical = 3
 [node name="EnemiesLeft" type="RichTextLabel" parent="Camera/Control/GridContainer/VBoxContainer/HBoxContainer2"]
 clip_contents = false
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Enemies Left: "
 script = ExtResource("16_2ursw")
