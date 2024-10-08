@@ -5,6 +5,3 @@
 
 [node name="PlayerGun" instance=ExtResource("1_3l54q")]
 script = ExtResource("2_jiyht")
-
-[node name="Gun_sprite" parent="." index="0"]
-position = Vector2(0, -60)
