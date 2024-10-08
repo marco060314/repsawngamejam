@@ -1,2 +1,9 @@
+<<<<<<< HEAD
 */.godot
 */project.godot
+=======
+# Godot 4+ specific ignores
+.godot/
+*.translation
+/android/
+>>>>>>> 4f53a48 (initial)
