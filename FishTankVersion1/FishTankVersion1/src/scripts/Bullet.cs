@@ -4,7 +4,7 @@ using System;
 public partial class Bullet : Area2D
 {
 	[Export] public int Damage { get; set; } = 10;
-	[Export] public float Speed { get; set; } = 500f;
+	[Export] public float Speed { get; set; } = 1700f;
 	[Export] public float Lifetime { get; set; } = 3f; // Lifetime in seconds
 
 	private Timer lifetimeTimer;

@@ -4,7 +4,6 @@ using System;
 public partial class Gun : Node2D
 {
 	[Export] public int Damage { get; set; } = 10;
-	[Export] public float BulletSpeed { get; set; } = 500f;
 	[Export] public float FireRate { get; set; } = 0.5f;
 	[Export] public PackedScene BulletScene;  // Add this line to export the Bullet scene
 	
@@ -30,15 +29,15 @@ public partial class Gun : Node2D
 		} catch (InvalidCastException e) {
 			isPlayer = false;
 		}
-		UpdateShieldPositionAndRotation();
+		UpdatePositionAndRotation();
 	}
 
 	public override void _Process(double delta)
 	{
 		if (owner != null)
-			UpdateShieldPositionAndRotation();
+			UpdatePositionAndRotation();
 	}
-	protected void UpdateShieldPositionAndRotation()
+	protected void UpdatePositionAndRotation()
 	{
 		if (isPlayer){
 			Rotation = p.getRotationVector().Angle() + Mathf.Pi / 2;
