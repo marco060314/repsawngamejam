@@ -15,11 +15,11 @@ public partial class BaseShield : CharacterBody2D
 		// Set up CollisionShape2D size
 		if (GetNodeOrNull<CollisionShape2D>("CollisionShape2D") is CollisionShape2D shape)
 		{
-			shape.Scale = Size;
+			//shape.Scale = Size;
 		}
 		if (GetNodeOrNull<Sprite2D>("Sprite2D") is Sprite2D shape2)
 		{
-			shape2.Scale = new Vector2(Size.X * 9.263391059f, Size.Y * 4.385752688f);
+			//shape2.Scale = new Vector2(Size.X * 9.263391059f, Size.Y * 4.385752688f);
 		}
 
 		// Initialize Area2D for detecting overlapping bodies
@@ -38,15 +38,27 @@ public partial class BaseShield : CharacterBody2D
 		if (owner != null)
 			UpdateShieldPositionAndRotation();
 	}
-
+	
 	protected void UpdateShieldPositionAndRotation()
 	{
-		Rotation = owner.Rotation;
-		GlobalPosition = owner.GlobalPosition;
-		GlobalPosition -= new Vector2(Mathf.Sin(owner.Rotation), Mathf.Cos(owner.Rotation)) * 60;
+		if (owner == null) return;
+		GlobalPosition = owner.GlobalPosition ;//+ offset;
 	}
 
-	// Shared push functionality
+	public virtual void SetShieldRotation(float rotationAngle)
+	{
+		Rotation = rotationAngle; 
+	}
+
+	// Offset logic (if needed)
+	public void SetShieldOffset(Vector2 ownerPosition)
+	{
+		float offsetDistance = 60; // Adjust this distance as needed
+		Vector2 offset = new Vector2(Mathf.Cos(Rotation), Mathf.Sin(Rotation)) * offsetDistance;
+		GlobalPosition = ownerPosition + offset;
+	}
+	
+
 	public virtual void ActivatePush()
 	{
 		// Detect and apply push to all bodies within Area2D

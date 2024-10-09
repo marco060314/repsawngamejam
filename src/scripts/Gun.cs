@@ -46,7 +46,11 @@ public partial class Gun : Node2D
 			GD.Print("Owner is not a player");
 			Rotation = owner.Rotation;
 		}
-		GlobalPosition = owner.GlobalPosition;
+		float xOffset = 30 * Mathf.Cos(Rotation); // Adjust for fish length
+		float yOffset = 18 * Mathf.Sin(Rotation); // Adjust for fish width
+		Vector2 offset = new Vector2(xOffset, yOffset);
+		Vector2 forwardDirection = new Vector2(0, -18).Rotated(Rotation); // 50 pixels forward
+		GlobalPosition = owner.GlobalPosition + forwardDirection;
 	}
 	public virtual void Shoot(Vector2 direction)
 	{

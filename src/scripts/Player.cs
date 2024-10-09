@@ -10,6 +10,11 @@ public partial class Player : Entity {
 	[Export] public PackedScene GunScene;    // Drag the PlayerGun.tscn here
 	[Export] public PackedScene ShieldScene; // Drag the PlayerShield.tscn here
 
+	[Export] public Texture2D player1Texture;
+	[Export] public Texture2D player2Texture;
+	
+	private Sprite2D playerSprite;
+
 	private PlayerGun gun;
 	private BaseShield shield;
 	private Vector2 rotationVector;
@@ -22,23 +27,37 @@ public partial class Player : Entity {
 	}
 
 	public override void _Ready() {
+		playerSprite = GetNode<Sprite2D>("Sprite");
+		float desiredWidth = 0;
+		float desiredHeight = 0;
 		if (isPlayerOne && GunScene != null) {
-			Position = new Vector2(400, 400);       // Set the player's initial position
+			playerSprite.Texture = player1Texture;
+			Position = new Vector2(200, 200);       // Set the player's initial position
 			gun = GunScene.Instantiate<PlayerGun>(); // Creates an instance of the gun
 			AddChild(gun);                          // Adds it as a child of the player
 			gun.LockToOwner(this);                  // Locks gun to follow the player
 			GD.Print("Player 1 has been assigned a gun");
+			desiredWidth = 200;  // Example desired width
+			desiredHeight = 200; // Example desired height
 		}
 		else if (isPlayerTwo && ShieldScene != null) {
+			playerSprite.Texture = player2Texture;
 			Position = new Vector2(1400, 400);  
 			shield = ShieldScene.Instantiate<BaseShield>(); // Creates an instance of the shield
 			AddChild(shield);                                // Adds it as a child of the player
 			shield.LockToOwner(this);                        // Locks shield to follow the player
 			GD.Print("Player 2 has been assigned a shield");
+			desiredWidth = 250;  // Example desired width
+			desiredHeight = 250; // Example desired height
 		}
 		
 		GD.Print($"Player {Name} - isPlayerOne: {isPlayerOne}, isPlayerTwo: {isPlayerTwo}");
 		GD.Print($"Gun: {gun}, Shield: {shield}");
+		
+		
+		Vector2 scale = new Vector2(desiredWidth / playerSprite.Texture.GetWidth(), 
+								desiredHeight / playerSprite.Texture.GetHeight());
+		playerSprite.Scale = scale;
 		
 		base._Ready();
 	}
@@ -66,34 +85,33 @@ public partial class Player : Entity {
 			Rotation = rotation;
 		}
 		else if (isPlayerTwo) {
-			// Handle movement
+			float rotationSpeed = 10.0f;
+			
 			direction = Input.GetVector("P2_LEFT", "P2_RIGHT", "P2_UP", "P2_DOWN");
 
-			// Raw input from the right joystick
+			if (direction.Length() > TOLERANCE)
+			{
+				float targetRotation = direction.Angle() + Mathf.Pi / 2;
+				Rotation = Mathf.LerpAngle(Rotation, targetRotation, rotationSpeed * (float)delta);
+			}
+
 			Vector2 rightStickDirection = new Vector2(
 				Input.GetActionRawStrength("P2_LOOK_LEFT", true) - Input.GetActionRawStrength("P2_LOOK_RIGHT", true),
 				Input.GetActionRawStrength("P2_LOOK_UP", true) - Input.GetActionRawStrength("P2_LOOK_DOWN", true)
 			);
 
-			// Calculate the angle of the right joystick
-			rightStickAngle = rightStickDirection.Angle() + Mathf.Pi / 2;
-			diff = 0;
-
-			// If the right joystick is moved beyond the tolerance threshold
-			if (rightStickDirection.Length() > TOLERANCE) {
-				rightStickDirection = rightStickDirection.Normalized(); // Normalize the direction
-
-				diff = (float) delta * Mathf.Abs(Rotation - rightStickAngle) * 3;
-				Rotation = Mathf.LerpAngle(Rotation, rightStickAngle, Mathf.Max(diff, 0.4f)); // Smoothly rotate the player
-				rotationVector.X = Mathf.Cos(Rotation - Mathf.Pi / 2);
-				rotationVector.Y = Mathf.Sin(Rotation - Mathf.Pi / 2);
-				rotationVector = rotationVector.Normalized();
+			if (rightStickDirection.Length() > TOLERANCE)
+			{
+				float shieldRotation = rightStickDirection.Angle();
+				shield.SetShieldRotation(shieldRotation); // Rotate shield separately
 			}
+			
 
-			// Activate shield push if the right trigger is pressed
-			if (Input.IsActionJustPressed("P2_RIGHT_TRIGGER") && shield != null) {
+			if (Input.IsActionJustPressed("P2_RIGHT_TRIGGER") && shield != null)
+			{
 				shield.ActivatePush();
 			}
+
 		}
 
 		base._PhysicsProcess(delta);

@@ -259,14 +259,14 @@ sources/2 = SubResource("TileSetAtlasSource_1tebt")
 
 [node name="Player1" parent="." instance=ExtResource("2_ch7e2")]
 z_index = 2
-position = Vector2(201, 204)
+position = Vector2(200, 200)
+isPlayerOne = true
+isPlayerTwo = false
 
 [node name="Player2" parent="." instance=ExtResource("2_ch7e2")]
 z_index = 2
-position = Vector2(1557, 454)
+position = Vector2(1400, 200)
 rotation = 2.87979
-isPlayerOne = false
-isPlayerTwo = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -4

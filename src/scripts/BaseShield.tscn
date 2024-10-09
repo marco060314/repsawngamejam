@@ -1,12 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnxomk56ub8tl"]
+[gd_scene load_steps=3 format=3 uid="uid://cnxomk56ub8tl"]
 
 [ext_resource type="Script" path="res://src/scripts/BaseShield.cs" id="1_csfa2"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1pa55"]
-size = Vector2(9.26601, 4.43145)
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_h2bs3"]
-specular_color = Color(0.266667, 1, 1, 1)
+[ext_resource type="Texture2D" uid="uid://ljkjdfkpce5j" path="res://assets/shield.png" id="2_bge8r"]
 
 [node name="BaseShield" type="CharacterBody2D"]
 collision_layer = 3
@@ -14,11 +9,11 @@ motion_mode = 1
 script = ExtResource("1_csfa2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(12.415, 3.72)
-shape = SubResource("RectangleShape2D_1pa55")
+position = Vector2(0, -44)
+scale = Vector2(1, 0.3)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.0588235, 0.47451, 1, 1)
-self_modulate = Color(0.168627, 1, 1, 1)
-scale = Vector2(115.005, 16.315)
-texture = SubResource("CanvasTexture_h2bs3")
+position = Vector2(-7.15256e-07, -44)
+rotation = 1.5708
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_bge8r")
