@@ -90,6 +90,10 @@ public partial class Player : Entity {
 			// Shoot if left mouse is pressed
 			if (Input.IsActionPressed("MOUSELEFTCLICK") && gun != null) {
 				gun.Shoot(rotationVector);
+				Input.SetDefaultCursorShape(Input.CursorShape.PointingHand);
+			}
+			else{
+				Input.SetDefaultCursorShape(Input.CursorShape.Arrow);
 			}
 
 			Rotation = rotation;
