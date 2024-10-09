@@ -65,7 +65,7 @@ public partial class Entity : CharacterBody2D
 		if (collision != null)
 		{
 			velocity = Vector2.Zero;
-			GD.Print((Name), " collided with ", ((Node)collision.GetCollider()).Name);
+			// GD.Print((Name), " collided with ", ((Node)collision.GetCollider()).Name);
 		}
 
 		Rotation = rotation;

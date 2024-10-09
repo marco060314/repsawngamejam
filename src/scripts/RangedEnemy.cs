@@ -3,7 +3,6 @@ using System;
 
 public partial class RangedEnemy : Enemy
 {
-	[Export] private Player[] players;
 	[Export] private Area2D shootrange;
 	[Export] private Area2D runawayrange;
 
@@ -29,7 +28,7 @@ public partial class RangedEnemy : Enemy
 	public override void _PhysicsProcess(double delta)
 	{
 		closestDistance = 10000;
-		foreach (Player p in players){
+		foreach (Player p in targets){
 			if (p.getPosition().DistanceTo(Position) < closestDistance)
 			{
 				closestDistance = p.getPosition().DistanceTo(Position);
@@ -56,7 +55,7 @@ public partial class RangedEnemy : Enemy
 		}
 		var bodies2 = runawayrange.GetOverlappingBodies();
 		foreach (var body in bodies2){
-			foreach (Player p in players){
+			foreach (Player p in targets){
 				if (body == p){
 					numDanger++;
 				}
@@ -69,7 +68,7 @@ public partial class RangedEnemy : Enemy
 		} 
 		else if (numDanger == 2){
 			runMode = true;
-			runVector = players[0].getPosition() - players[1].getPosition();
+			runVector = targets[0].getPosition() - targets[1].getPosition();
 			runVector = runVector.Normalized();
 			runAngle = runVector.Angle() + Mathf.Pi / 2;
 			direction = new Vector2(Mathf.Sin(runAngle), Mathf.Cos(runAngle));

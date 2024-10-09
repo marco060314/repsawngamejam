@@ -13,4 +13,8 @@ public partial class Counter : RichTextLabel
         counter+=dx;
         Text=prefix+" "+counter;
     }
+    public void set(int counter){
+        this.counter=counter;
+        Text=prefix+" "+counter;
+    }
 }

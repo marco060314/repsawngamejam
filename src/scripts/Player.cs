@@ -22,6 +22,13 @@ public partial class Player : Entity {
 	private float diff = 0.0f;
 	private float rightStickAngle = 0.0f;
 
+	private Timer invincibilityFrames;
+	private bool damagable;
+
+	[Signal]
+	public delegate void onDamageEventHandler(double damageDx);
+
+
 	public Player() : base(300f, 15f, 23f, 100f) {
 		// Initial setup of player properties
 	}
@@ -58,7 +65,10 @@ public partial class Player : Entity {
 		Vector2 scale = new Vector2(desiredWidth / playerSprite.Texture.GetWidth(), 
 								desiredHeight / playerSprite.Texture.GetHeight());
 		playerSprite.Scale = scale;
-		
+
+		damagable=true;
+		invincibilityFrames=GetNode<Timer>("InvinceFrames");
+
 		base._Ready();
 	}
 
@@ -115,6 +125,18 @@ public partial class Player : Entity {
 		}
 
 		base._PhysicsProcess(delta);
+	}
+
+	public void onNotInvincible(){
+		damagable=true;
+	}
+
+	public void damage(double delta){
+		if(!damagable) return;
+		GD.Print("inside damage and timer is off.");
+		invincibilityFrames.Start();
+		damagable=false;
+		EmitSignal(SignalName.onDamage,delta);
 	}
 
 	// Getter methods
