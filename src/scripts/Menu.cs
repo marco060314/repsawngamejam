@@ -10,6 +10,8 @@ public partial class Menu : Control
 		var arrow=ResourceLoader.Load("res://assets/cursor.png");
 		Input.SetCustomMouseCursor(click,Input.CursorShape.PointingHand);
 		Input.SetCustomMouseCursor(arrow,Input.CursorShape.Arrow);
+		
+		GetNode<CheckButton>("DifficultySelector/Medium").ButtonPressed=true;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

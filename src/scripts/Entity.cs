@@ -7,9 +7,6 @@ public partial class Entity : CharacterBody2D
 	protected Vector2 position;
 	protected Vector2 velocity;
 	protected float rotation;
-
-	private bool hit;
-
 	[Export] protected float speed;
 	[Export] protected float friction;
 	[Export] protected float acceleration;
@@ -21,18 +18,16 @@ public partial class Entity : CharacterBody2D
 		this.acceleration = acceleration;
 		this.health = health;
 		direction = new Vector2(0, 0);
-		hit = false;
 	}
 
 	public void updateDirection(Vector2 direction){
 		this.direction = direction;
 	}
 
-	public void Hit(bool hit, float damage){
-		this.hit = hit;
-		if (this.hit == true){
-			health -= damage;
-			this.hit = false;
+	public void Damage(float damage){
+		health-=damage;
+		if(health<=0){
+			QueueFree();
 		}
 	}
 

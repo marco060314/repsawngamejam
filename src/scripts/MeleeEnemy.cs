@@ -40,7 +40,7 @@ public partial class MeleeEnemy : Enemy{
 			Node n=(Node)collision.GetCollider();
 			// GD.Print(n.GetType());
 			if(n.GetType()== typeof(Player)){
-				((Player)n).damage(10f);
+				((Player)n).damage(3f);
 			}
 		}
 

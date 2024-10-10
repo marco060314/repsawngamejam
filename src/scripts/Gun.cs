@@ -43,7 +43,6 @@ public partial class Gun : Node2D
 			Rotation = p.getRotationVector().Angle() + Mathf.Pi / 2;
 		} 
 		else {
-			GD.Print("Owner is not a player");
 			Rotation = owner.Rotation;
 		}
 		float xOffset = 30 * Mathf.Cos(Rotation); // Adjust for fish length
@@ -63,6 +62,14 @@ public partial class Gun : Node2D
  	   if (BulletScene != null)
    		{
 			var bullet = BulletScene.Instantiate<Bullet>();
+			bullet.hitsPlayers=!isPlayer;
+			if(isPlayer){
+				bullet.Modulate=new Color(0,255,0);
+			}
+			else{
+				bullet.Modulate=new Color(255,0,0);
+				bullet.Speed/=2;
+			}
 	   	 	bullet.GlobalPosition = GlobalPosition + direction * 30;
 	   	 	bullet.SetDirection(direction);
 			GetTree().CurrentScene.AddChild(bullet);

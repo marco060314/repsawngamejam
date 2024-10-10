@@ -132,6 +132,7 @@ public partial class Player : Entity {
 	}
 
 	public void onNotInvincible(){
+		Modulate=new Color(Modulate.R,Modulate.G,Modulate.B,1);
 		damagable=true;
 	}
 
@@ -139,6 +140,7 @@ public partial class Player : Entity {
 		if(!damagable) return;
 		GD.Print("inside damage and timer is off.");
 		invincibilityFrames.Start();
+		Modulate=new Color(Modulate.R,Modulate.G,Modulate.B,100.0f/255);
 		damagable=false;
 		EmitSignal(SignalName.onDamage,delta);
 	}

@@ -268,6 +268,7 @@ isPlayerOne = true
 isPlayerTwo = false
 
 [node name="InvinceFrames" type="Timer" parent="Player1"]
+wait_time = 0.2
 
 [node name="Player2" parent="." instance=ExtResource("2_ch7e2")]
 z_index = 2
@@ -275,7 +276,7 @@ position = Vector2(1400, 200)
 rotation = 2.87979
 
 [node name="InvinceFrames" type="Timer" parent="Player2"]
-wait_time = 2.0
+wait_time = 0.5
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -4

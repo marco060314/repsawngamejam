@@ -6,6 +6,8 @@ public partial class RangedEnemy : Enemy
 	[Export] private Area2D shootrange;
 	[Export] private Area2D runawayrange;
 
+	[Export] private PackedScene gunScene;
+
 	private Player closestPlayer;
 	private float closestDistance;
 	private Vector2 direction;
@@ -15,6 +17,8 @@ public partial class RangedEnemy : Enemy
 	private float runAngle;
 	private bool runMode;
 
+	private Gun gun;
+
 	public RangedEnemy() : base(50f, 15f, 23f, 50f)	{
 		Position = new Vector2(960, 720);
 	}
@@ -22,6 +26,9 @@ public partial class RangedEnemy : Enemy
 	{
 		numDanger = 0;
 		runMode = false;
+		gun=gunScene.Instantiate<EnemyGun>();
+		AddChild(gun);
+		gun.LockToOwner(this);
 		base._Ready();
 	}
 
@@ -38,6 +45,9 @@ public partial class RangedEnemy : Enemy
 
 		// Move towards closest player
 		direction = (closestPlayer.getPosition() - Position).Normalized();
+		
+		gun.Shoot(direction);
+
 		Rotation = direction.Angle() + Mathf.Pi / 2;
 		if (runMode == false){
 			velocity.X = Mathf.MoveToward(Velocity.X, direction.X * speed, acceleration);

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cnop8dl17w6mk"]
+[gd_scene load_steps=6 format=3 uid="uid://cnop8dl17w6mk"]
 
 [ext_resource type="Script" path="res://src/scripts/RangedEnemy.cs" id="1_ufyr0"]
 [ext_resource type="Texture2D" uid="uid://ew8cvn03btxv" path="res://assets/rangedSalmonEnemy.png" id="2_fe5av"]
+[ext_resource type="PackedScene" uid="uid://qgqxel7ytgbn" path="res://src/scripts/EnemyGun.tscn" id="2_r6qai"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cgqym"]
 radius = 249.618
@@ -13,6 +14,7 @@ motion_mode = 1
 script = ExtResource("1_ufyr0")
 shootrange = NodePath("ShootRange")
 runawayrange = NodePath("RunAwayRange")
+gunScene = ExtResource("2_r6qai")
 speed = 400.0
 friction = 15.0
 acceleration = 23.0
