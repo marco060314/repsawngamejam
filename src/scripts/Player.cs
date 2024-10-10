@@ -98,7 +98,7 @@ public partial class Player : Entity {
 
 			Rotation = rotation;
 		}
-		else if (isPlayerTwo) {
+				else if (isPlayerTwo) {
 			float rotationSpeed = 10.0f;
 			
 			direction = Input.GetVector("P2_LEFT", "P2_RIGHT", "P2_UP", "P2_DOWN");
@@ -108,19 +108,6 @@ public partial class Player : Entity {
 				float targetRotation = direction.Angle() + Mathf.Pi / 2;
 				Rotation = Mathf.LerpAngle(Rotation, targetRotation, rotationSpeed * (float)delta);
 			}
-
-			Vector2 rightStickDirection = new Vector2(
-				Input.GetActionRawStrength("P2_LOOK_LEFT", true) - Input.GetActionRawStrength("P2_LOOK_RIGHT", true),
-				Input.GetActionRawStrength("P2_LOOK_UP", true) - Input.GetActionRawStrength("P2_LOOK_DOWN", true)
-			);
-
-			if (rightStickDirection.Length() > TOLERANCE)
-			{
-				float shieldRotation = rightStickDirection.Angle();
-				shield.SetShieldRotation(shieldRotation); // Rotate shield separately
-			}
-			
-
 			if (Input.IsActionJustPressed("P2_RIGHT_TRIGGER") && shield != null)
 			{
 				shield.ActivatePush();

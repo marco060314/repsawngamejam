@@ -7,16 +7,17 @@
 size = Vector2(8.4375, 20)
 
 [node name="EnemyTest" type="CharacterBody2D"]
-rotation = 4.71239
 scale = Vector2(0.2, 0.2)
+collision_layer = 3
+collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_x67nk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-35, 60)
+rotation = 1.5708
 texture = ExtResource("2_plm23")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-50, -29.9999)
-rotation = -1.5708
 scale = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_hqxek")
