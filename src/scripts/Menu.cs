@@ -3,6 +3,7 @@ using System;
 
 public partial class Menu : Control
 {
+	public static SoundManager soundManager;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -12,6 +13,7 @@ public partial class Menu : Control
 		Input.SetCustomMouseCursor(arrow,Input.CursorShape.Arrow);
 		
 		GetNode<CheckButton>("DifficultySelector/Medium").ButtonPressed=true;
+		soundManager=GetNode<SoundManager>("SoundManager");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -4,6 +4,7 @@ using System;
 public partial class Background : Node2D
 {
 	public static Difficulty difficulty=Difficulty.EASY;
+	public static SoundManager soundManager;
 	public override void _Ready()
 	{
 		var click=ResourceLoader.Load("res://assets/cursorclicked.png");
@@ -11,6 +12,9 @@ public partial class Background : Node2D
 		Input.SetCustomMouseCursor(click,Input.CursorShape.PointingHand);
 		Input.SetCustomMouseCursor(arrow,Input.CursorShape.Arrow);
 		GetNode<Round>("Camera/Control/GridContainer/VBoxContainer/HBoxContainer/Round").signalNewRound();
+		soundManager=GetNode<SoundManager>("SoundManager");
+		GetNode<AudioStreamPlayer>("BackgroundMusic").Play(); //hopefully this will stop after going to main menu?
+		soundManager.playSound(Sound.GAME_START,0f,1);
 	}
 
 	[Signal] 

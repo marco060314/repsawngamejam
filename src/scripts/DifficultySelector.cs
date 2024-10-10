@@ -23,6 +23,7 @@ public partial class DifficultySelector : VBoxContainer
 			easyBtn.SetPressedNoSignal(true);
 			return;
 		}
+		playSound();
 		difficulty=Difficulty.EASY;
 		easyBtn.SetPressedNoSignal(true);
 		mediumBtn.SetPressedNoSignal(false);
@@ -33,6 +34,7 @@ public partial class DifficultySelector : VBoxContainer
 			onEasyToggled(true);
 			return;
 		}
+		playSound();
 		difficulty=Difficulty.MEDIUM;
 		easyBtn.SetPressedNoSignal(false);
 		hardBtn.SetPressedNoSignal(false);
@@ -42,10 +44,16 @@ public partial class DifficultySelector : VBoxContainer
 			onEasyToggled(true);
 			return;
 		}
+		playSound();
 		difficulty=Difficulty.HARD;
 		easyBtn.SetPressedNoSignal(false);
 		mediumBtn.SetPressedNoSignal(false);
 	}
+
+	private void playSound(){
+		Menu.soundManager.playSound(Sound.CHANGE_DIFFICULTY,-10f,1);
+	}
+
 	public Difficulty getDifficulty(){
 		return difficulty;
 	}

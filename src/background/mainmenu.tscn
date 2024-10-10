@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cdshhxsw5ifom"]
+[gd_scene load_steps=13 format=3 uid="uid://cdshhxsw5ifom"]
 
 [ext_resource type="Script" path="res://src/scripts/Menu.cs" id="1_5cq35"]
 [ext_resource type="Texture2D" uid="uid://bgh1q75m1dnow" path="res://assets/menu2.png" id="1_aukg8"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://d036rdrpbw5em" path="res://assets/title2.png" id="9_5c7rw"]
 [ext_resource type="Script" path="res://src/scripts/Title2.cs" id="10_ue8a3"]
 [ext_resource type="Script" path="res://src/scripts/SceneSwitcher.cs" id="11_vmo7h"]
+[ext_resource type="Script" path="res://src/scripts/SoundManager.cs" id="12_ebyf6"]
 
 [node name="MainMenu" type="Control"]
 texture_filter = 1
@@ -105,6 +106,11 @@ script = ExtResource("10_ue8a3")
 
 [node name="SceneSwitcher" type="Node2D" parent="."]
 script = ExtResource("11_vmo7h")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+
+[node name="SoundManager" type="Node" parent="."]
+script = ExtResource("12_ebyf6")
 
 [connection signal="toggled" from="DifficultySelector/Easy" to="DifficultySelector" method="onEasyToggled"]
 [connection signal="toggled" from="DifficultySelector/Medium" to="DifficultySelector" method="onMediumToggled"]

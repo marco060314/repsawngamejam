@@ -24,6 +24,7 @@ public partial class Enemy : Entity {
 
     public override void handleDeath(){
 		GD.Print("inside handleDeath()::Enemy");
+		Background.soundManager.playSound(Sound.ENEMY_DEATH,-25f,1f);
 		if(GetParent() is EnemySpawner){
 			((EnemySpawner)GetParent()).died();
 		}

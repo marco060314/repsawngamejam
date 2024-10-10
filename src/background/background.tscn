@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://bxmnp83v8yncy"]
+[gd_scene load_steps=28 format=4 uid="uid://bxmnp83v8yncy"]
 
 [ext_resource type="Texture2D" uid="uid://dasrwc15atrj5" path="res://assets/tiles.png" id="1_n4c3u"]
 [ext_resource type="Script" path="res://src/scripts/Background.cs" id="1_u66xw"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://src/scripts/EnemiesLeft.cs" id="16_2ursw"]
 [ext_resource type="Script" path="res://src/scripts/EnemySpawner.cs" id="17_gbu0d"]
 [ext_resource type="Script" path="res://src/scripts/SceneSwitcher.cs" id="19_th62v"]
+[ext_resource type="Script" path="res://src/scripts/SoundManager.cs" id="20_j0hv5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_m4jjj"]
 friction = 0.0
@@ -511,6 +512,12 @@ autostart = true
 
 [node name="SceneSwitcher" type="Node2D" parent="."]
 script = ExtResource("19_th62v")
+
+[node name="SoundManager" type="Node" parent="."]
+script = ExtResource("20_j0hv5")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+volume_db = -30.0
 
 [connection signal="gameOverWithScores" from="." to="SceneSwitcher" method="gameOverWithScores"]
 [connection signal="onDamage" from="Player1" to="Camera/Control/Stats/P1Stats/HHealth/VBoxContainer/P1HealthBar" method="onPlayerDamaged"]

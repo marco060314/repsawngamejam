@@ -7,7 +7,8 @@ public partial class Counter : RichTextLabel
     public int counter;
     public Counter(String prefix){
         this.prefix=prefix;
-        Text=prefix;
+        counter=0;
+        set(0);
     }
     public void add(int dx){
         counter+=dx;

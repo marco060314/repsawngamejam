@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d1bwg031eul5d"]
+[gd_scene load_steps=12 format=3 uid="uid://d1bwg031eul5d"]
 
 [ext_resource type="Texture2D" uid="uid://bgh1q75m1dnow" path="res://assets/menu2.png" id="1_0krrm"]
 [ext_resource type="Script" path="res://src/scripts/Gameover.cs" id="1_4lntx"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://d4njmoemhexkk" path="res://assets/restartbutton.png" id="5_xem3x"]
 [ext_resource type="Texture2D" uid="uid://ceiu6yt8pp7q6" path="res://assets/restartclicked.png" id="6_hfll7"]
 [ext_resource type="Script" path="res://src/scripts/Restart.cs" id="7_u650k"]
+[ext_resource type="Script" path="res://src/scripts/SoundManager.cs" id="11_pjww2"]
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -113,6 +114,9 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource("5_xem3x")
 texture_pressed = ExtResource("6_hfll7")
 script = ExtResource("7_u650k")
+
+[node name="SoundManager" type="Node" parent="."]
+script = ExtResource("11_pjww2")
 
 [connection signal="pressed" from="Panel/MainMenu" to="Panel/MainMenu" method="onPressed"]
 [connection signal="pressed" from="Panel/Restart" to="Panel/Restart" method="onPressed"]

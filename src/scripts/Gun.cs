@@ -66,11 +66,13 @@ public partial class Gun : Node2D
 			if(isPlayer){
 				bullet.Modulate=new Color(0,255,0);
 				bullet.Damage=10;
+				Background.soundManager.playSound(Sound.PLAYER_SHOOT,0,1);
 			}
 			else{
 				bullet.Modulate=new Color(255,0,0);
 				bullet.Speed/=3;
 				bullet.Damage=3;
+				Background.soundManager.playSound(Sound.ENEMY_SHOOT,-25f,1);
 			}
 	   	 	bullet.GlobalPosition = GlobalPosition + direction * 30;
 	   	 	bullet.SetDirection(direction);
