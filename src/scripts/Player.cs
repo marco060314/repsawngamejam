@@ -27,6 +27,8 @@ public partial class Player : Entity {
 
 	[Signal]
 	public delegate void onDamageEventHandler(double damageDx);
+	[Signal]
+	public delegate void shakeEventHandler();
 
 
 	public Player() : base(300f, 15f, 23f, 100f) {
@@ -130,6 +132,7 @@ public partial class Player : Entity {
 		Modulate=new Color(Modulate.R,Modulate.G,Modulate.B,100.0f/255);
 		damagable=false;
 		EmitSignal(SignalName.onDamage,delta);
+		EmitSignal(SignalName.shake);
 	}
 
 	// Getter methods

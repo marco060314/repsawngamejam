@@ -287,10 +287,6 @@ tile_set = SubResource("TileSet_mur7a")
 
 [node name="MeleeEnemy" parent="." instance=ExtResource("3_dlpvw")]
 position = Vector2(388, 406)
-speed = 100.0
-friction = 15.0
-acceleration = 23.0
-health = 50.0
 
 [node name="RangedEnemyTest" parent="." instance=ExtResource("4_hojau")]
 position = Vector2(1017, 422)
@@ -518,8 +514,10 @@ script = ExtResource("19_th62v")
 
 [connection signal="gameOverWithScores" from="." to="SceneSwitcher" method="gameOverWithScores"]
 [connection signal="onDamage" from="Player1" to="Camera/Control/Stats/P1Stats/HHealth/VBoxContainer/P1HealthBar" method="onPlayerDamaged"]
+[connection signal="shake" from="Player1" to="Camera" method="shake"]
 [connection signal="timeout" from="Player1/InvinceFrames" to="Player1" method="onNotInvincible"]
 [connection signal="onDamage" from="Player2" to="Camera/Control/Stats/P2Stats/HHealth/VBoxContainer/P2HealthBar" method="onPlayerDamaged"]
+[connection signal="shake" from="Player2" to="Camera" method="shake"]
 [connection signal="timeout" from="Player2/InvinceFrames" to="Player2" method="onNotInvincible"]
 [connection signal="gameOver" from="Camera/Control/Stats/P1Stats/HHealth/VBoxContainer/P1HealthBar" to="." method="gameOver"]
 [connection signal="gameOver" from="Camera/Control/Stats/P2Stats/HHealth/VBoxContainer/P2HealthBar" to="." method="gameOver"]
