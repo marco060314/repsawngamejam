@@ -3,9 +3,10 @@ using System;
 
 public partial class RangedEnemy : Enemy
 {
-	[Export] private Player[] players;
 	[Export] private Area2D shootrange;
 	[Export] private Area2D runawayrange;
+
+	[Export] private PackedScene gunScene;
 
 	private Player closestPlayer;
 	private float closestDistance;
@@ -16,20 +17,26 @@ public partial class RangedEnemy : Enemy
 	private float runAngle;
 	private bool runMode;
 
-	public RangedEnemy() : base(50f, 15f, 23f, 50f)	{
+	private Gun gun;
+
+	public RangedEnemy() : base(50f, 15f, 23f, 30f)	{
+		GD.Print("rangedhealth: "+health);
 		Position = new Vector2(960, 720);
 	}
 	public override void _Ready()
 	{
 		numDanger = 0;
 		runMode = false;
+		gun=gunScene.Instantiate<EnemyGun>();
+		AddChild(gun);
+		gun.LockToOwner(this);
 		base._Ready();
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		closestDistance = 10000;
-		foreach (Player p in players){
+		foreach (Player p in targets){
 			if (p.getPosition().DistanceTo(Position) < closestDistance)
 			{
 				closestDistance = p.getPosition().DistanceTo(Position);
@@ -39,6 +46,9 @@ public partial class RangedEnemy : Enemy
 
 		// Move towards closest player
 		direction = (closestPlayer.getPosition() - Position).Normalized();
+		
+		gun.Shoot(direction);
+
 		Rotation = direction.Angle() + Mathf.Pi / 2;
 		if (runMode == false){
 			velocity.X = Mathf.MoveToward(Velocity.X, direction.X * speed, acceleration);
@@ -56,7 +66,7 @@ public partial class RangedEnemy : Enemy
 		}
 		var bodies2 = runawayrange.GetOverlappingBodies();
 		foreach (var body in bodies2){
-			foreach (Player p in players){
+			foreach (Player p in targets){
 				if (body == p){
 					numDanger++;
 				}
@@ -69,7 +79,7 @@ public partial class RangedEnemy : Enemy
 		} 
 		else if (numDanger == 2){
 			runMode = true;
-			runVector = players[0].getPosition() - players[1].getPosition();
+			runVector = targets[0].getPosition() - targets[1].getPosition();
 			runVector = runVector.Normalized();
 			runAngle = runVector.Angle() + Mathf.Pi / 2;
 			direction = new Vector2(Mathf.Sin(runAngle), Mathf.Cos(runAngle));

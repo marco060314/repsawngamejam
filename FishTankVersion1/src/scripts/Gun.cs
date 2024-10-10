@@ -4,7 +4,6 @@ using System;
 public partial class Gun : Node2D
 {
 	[Export] public int Damage { get; set; } = 10;
-	[Export] public float BulletSpeed { get; set; } = 500f;
 	[Export] public float FireRate { get; set; } = 0.5f;
 	[Export] public PackedScene BulletScene;  // Add this line to export the Bullet scene
 	
@@ -30,21 +29,20 @@ public partial class Gun : Node2D
 		} catch (InvalidCastException e) {
 			isPlayer = false;
 		}
-		UpdateGunPositionAndRotation();
+		UpdatePositionAndRotation();
 	}
 
 	public override void _Process(double delta)
 	{
 		if (owner != null)
-			UpdateGunPositionAndRotation();
+			UpdatePositionAndRotation();
 	}
-	protected void UpdateGunPositionAndRotation()
+	protected void UpdatePositionAndRotation()
 	{
 		if (isPlayer){
 			Rotation = p.getRotationVector().Angle() + Mathf.Pi / 2;
 		} 
 		else {
-			GD.Print("Owner is not a player");
 			Rotation = owner.Rotation;
 		}
 		float xOffset = 30 * Mathf.Cos(Rotation); // Adjust for fish length
@@ -64,6 +62,16 @@ public partial class Gun : Node2D
  	   if (BulletScene != null)
    		{
 			var bullet = BulletScene.Instantiate<Bullet>();
+			bullet.hitsPlayers=!isPlayer;
+			if(isPlayer){
+				bullet.Modulate=new Color(0,255,0);
+				bullet.Damage=10;
+			}
+			else{
+				bullet.Modulate=new Color(255,0,0);
+				bullet.Speed/=3;
+				bullet.Damage=3;
+			}
 	   	 	bullet.GlobalPosition = GlobalPosition + direction * 30;
 	   	 	bullet.SetDirection(direction);
 			GetTree().CurrentScene.AddChild(bullet);

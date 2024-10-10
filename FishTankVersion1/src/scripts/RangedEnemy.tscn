@@ -1,32 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://cnop8dl17w6mk"]
+[gd_scene load_steps=6 format=3 uid="uid://cnop8dl17w6mk"]
 
 [ext_resource type="Script" path="res://src/scripts/RangedEnemy.cs" id="1_ufyr0"]
-[ext_resource type="Texture2D" uid="uid://w6g0fhqeayfb" path="res://assets/player.png" id="2_rouvo"]
+[ext_resource type="Texture2D" uid="uid://ew8cvn03btxv" path="res://assets/rangedSalmonEnemy.png" id="2_fe5av"]
+[ext_resource type="PackedScene" uid="uid://qgqxel7ytgbn" path="res://src/scripts/EnemyGun.tscn" id="2_r6qai"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_cgqym"]
-radius = 249.618
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y5wdk"]
+radius = 95.0
+height = 480.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p1xp4"]
 
-[node name="RangedEnemyTest" type="CharacterBody2D" node_paths=PackedStringArray("players", "shootrange", "runawayrange")]
+[node name="RangedEnemyTest" type="CharacterBody2D" node_paths=PackedStringArray("shootrange", "runawayrange")]
+collision_layer = 3
+collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_ufyr0")
-players = []
 shootrange = NodePath("ShootRange")
 runawayrange = NodePath("RunAwayRange")
-speed = 400.0
-friction = 15.0
-acceleration = 23.0
-health = 50.0
+gunScene = ExtResource("2_r6qai")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.904041, 0.000727737, 0.915775, 1)
+rotation = 1.5708
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_rouvo")
+texture = ExtResource("2_fe5av")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 scale = Vector2(0.2, 0.2)
-shape = SubResource("CircleShape2D_cgqym")
+shape = SubResource("CapsuleShape2D_y5wdk")
 
 [node name="ShootRange" type="Area2D" parent="."]
 

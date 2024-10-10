@@ -2,15 +2,13 @@ using Godot;
 using System;
 
 public partial class MeleeEnemy : Enemy{
-	[Export] private Player[] players;
-
 	private Player closestPlayer;
 	private float closestDistance;
 	private Vector2 direction;
 
 	private Vector2 velocity;
-	
-	public MeleeEnemy() : base(100f, 15f, 23f, 50f) {
+
+	public MeleeEnemy() : base(100f, 15f, 23f, 10f) {
 		Position = new Vector2(960, 540);
 	}
 	public override void _Ready()
@@ -22,7 +20,7 @@ public partial class MeleeEnemy : Enemy{
 	
 	public override void _PhysicsProcess(double delta){
 		closestDistance = 10000;
-		foreach (Player p in players){
+		foreach (Player p in targets){
 			if (p.getPosition().DistanceTo(Position) < closestDistance){
 				closestDistance = p.getPosition().DistanceTo(Position);
 				closestPlayer = p;
@@ -35,6 +33,17 @@ public partial class MeleeEnemy : Enemy{
 		velocity.X = Mathf.MoveToward(Velocity.X, direction.X * speed, acceleration);
 		velocity.Y = Mathf.MoveToward(Velocity.Y, direction.Y * speed, acceleration);
 		Velocity = velocity;
+
+		var collision = MoveAndCollide(Velocity * (float)delta);
+		if (collision != null)
+		{
+			Node n=(Node)collision.GetCollider();
+			// GD.Print(n.GetType());
+			if(n.GetType()== typeof(Player)){
+				((Player)n).damage(3f);
+			}
+		}
+
 		base._PhysicsProcess(delta);
 	}
 }

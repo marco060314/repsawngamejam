@@ -22,6 +22,13 @@ public partial class Player : Entity {
 	private float diff = 0.0f;
 	private float rightStickAngle = 0.0f;
 
+	private Timer invincibilityFrames;
+	private bool damagable;
+
+	[Signal]
+	public delegate void onDamageEventHandler(double damageDx);
+
+
 	public Player() : base(300f, 15f, 23f, 100f) {
 		// Initial setup of player properties
 	}
@@ -32,7 +39,7 @@ public partial class Player : Entity {
 		float desiredHeight = 0;
 		if (isPlayerOne && GunScene != null) {
 			playerSprite.Texture = player1Texture;
-			Position = new Vector2(400, 400);       // Set the player's initial position
+			Position = new Vector2(200, 200);       // Set the player's initial position
 			gun = GunScene.Instantiate<PlayerGun>(); // Creates an instance of the gun
 			AddChild(gun);                          // Adds it as a child of the player
 			gun.LockToOwner(this);                  // Locks gun to follow the player
@@ -58,7 +65,10 @@ public partial class Player : Entity {
 		Vector2 scale = new Vector2(desiredWidth / playerSprite.Texture.GetWidth(), 
 								desiredHeight / playerSprite.Texture.GetHeight());
 		playerSprite.Scale = scale;
-		
+
+		damagable=true;
+		invincibilityFrames=GetNode<Timer>("InvinceFrames");
+
 		base._Ready();
 	}
 
@@ -78,14 +88,18 @@ public partial class Player : Entity {
 			}
 
 			// Shoot if left mouse is pressed
-			if (Input.IsActionJustPressed("MOUSELEFTCLICK") && gun != null) {
+			if (Input.IsActionPressed("MOUSELEFTCLICK") && gun != null) {
 				gun.Shoot(rotationVector);
+				Input.SetDefaultCursorShape(Input.CursorShape.PointingHand);
+			}
+			else{
+				Input.SetDefaultCursorShape(Input.CursorShape.Arrow);
 			}
 
 			Rotation = rotation;
 		}
-		else if (isPlayerTwo) {
-			 float rotationSpeed = 10.0f;
+				else if (isPlayerTwo) {
+			float rotationSpeed = 10.0f;
 			
 			direction = Input.GetVector("P2_LEFT", "P2_RIGHT", "P2_UP", "P2_DOWN");
 
@@ -94,28 +108,30 @@ public partial class Player : Entity {
 				float targetRotation = direction.Angle() + Mathf.Pi / 2;
 				Rotation = Mathf.LerpAngle(Rotation, targetRotation, rotationSpeed * (float)delta);
 			}
-
-			Vector2 rightStickDirection = new Vector2(
-				Input.GetActionRawStrength("P2_LOOK_LEFT", true) - Input.GetActionRawStrength("P2_LOOK_RIGHT", true),
-				Input.GetActionRawStrength("P2_LOOK_UP", true) - Input.GetActionRawStrength("P2_LOOK_DOWN", true)
-			);
-
-			if (rightStickDirection.Length() > TOLERANCE)
-			{
-				float shieldRotation = rightStickDirection.Angle();
-				shield.SetShieldRotation(shieldRotation); // Rotate shield separately
-			}
-			
-
 			if (Input.IsActionJustPressed("P2_RIGHT_TRIGGER") && shield != null)
 			{
 				shield.ActivatePush();
 			}
+
 		}
 
 		base._PhysicsProcess(delta);
 	}
-	
+
+	public void onNotInvincible(){
+		Modulate=new Color(Modulate.R,Modulate.G,Modulate.B,1);
+		damagable=true;
+	}
+
+	public void damage(double delta){
+		if(!damagable) return;
+		GD.Print("inside damage and timer is off.");
+		invincibilityFrames.Start();
+		Modulate=new Color(Modulate.R,Modulate.G,Modulate.B,100.0f/255);
+		damagable=false;
+		EmitSignal(SignalName.onDamage,delta);
+	}
+
 	// Getter methods
 	public Vector2 getPosition(){
 		return position;

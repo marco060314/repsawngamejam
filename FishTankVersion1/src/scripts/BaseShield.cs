@@ -4,24 +4,27 @@ using System;
 public partial class BaseShield : CharacterBody2D
 {
 	[Export] public int Durability { get; set; } = 100;
-	[Export] public Vector2 Size { get; set; } = new Vector2(15, 5);
-	[Export] public float PushForce { get; set; } = 100f; // Common push force for all shields
+	[Export] public float Size { get; set; } = 3f;
+	[Export] public float PushForce { get; set; } = 10000f; // Common push force for all shields
 
 	protected Node2D owner; // The player or enemy this shield is attached to
 	private Area2D detectionArea;
+	private Vector2 rotationVector = new Vector2(0, 0);
 
 	public override void _Ready()
 	{
+		this.TopLevel = true;
 		// Set up CollisionShape2D size
-		if (GetNodeOrNull<CollisionShape2D>("CollisionShape2D") is CollisionShape2D shape)
-		{
-			//shape.Scale = Size;
-		}
-		if (GetNodeOrNull<Sprite2D>("Sprite2D") is Sprite2D shape2)
-		{
-			//shape2.Scale = new Vector2(Size.X * 9.263391059f, Size.Y * 4.385752688f);
-		}
+		// if (GetNodeOrNull<CollisionShape2D>("CollisionShape2D") is CollisionShape2D shape)
+		// {
+		// 	shape.Scale *= Size;
+		// }
+		// if (GetNodeOrNull<Sprite2D>("Sprite2D") is Sprite2D shape2)
+		// {
+		// 	shape2.Scale *= Size;
+		// }
 
+		this.Scale = new Vector2(Size, Size);
 		// Initialize Area2D for detecting overlapping bodies
 		detectionArea = GetNode<Area2D>("Area2D");
 		detectionArea.Connect("body_entered", new Callable(this, nameof(OnBodyEntered)));
@@ -30,19 +33,34 @@ public partial class BaseShield : CharacterBody2D
 	public void LockToOwner(Node2D ownerNode)
 	{
 		owner = ownerNode;
-		UpdateShieldPositionAndRotation();
 	}
 
 	public override void _Process(double delta)
 	{
-		if (owner != null)
-			UpdateShieldPositionAndRotation();
+		GlobalPosition = owner.GlobalPosition + rotationVector * 0;
+		
+		// Use the right joystick for Player 2 rotation (raw input)
+		Vector2 rightStickDirection = new Vector2(
+				Input.GetActionRawStrength("P2_LOOK_RIGHT", true) - Input.GetActionRawStrength("P2_LOOK_LEFT", true),
+				Input.GetActionRawStrength("P2_LOOK_DOWN", true) - Input.GetActionRawStrength("P2_LOOK_UP", true));
+
+		// Calculate the angle of the right joystick in radians
+		float rightStickAngle = rightStickDirection.Angle() + Mathf.Pi / 2;
+		float diff = 0;
+
+		// If the right joystick is moved beyond the tolerance threshold
+		if (rightStickDirection.Length() > 0.05f)
+		{
+			diff = (float)delta * Mathf.Abs(Rotation - rightStickAngle) * 2;
+			Rotation = Mathf.LerpAngle(Rotation, rightStickAngle, Mathf.Max(diff, 0.1f));
+			rotationVector.X = Mathf.Cos(Rotation - Mathf.Pi / 2);
+			rotationVector.Y = Mathf.Sin(Rotation - Mathf.Pi / 2);
+		}
 	}
 	
 	protected void UpdateShieldPositionAndRotation()
 	{
-		if (owner == null) return;
-		GlobalPosition = owner.GlobalPosition ;//+ offset;
+		GlobalPosition = owner.GlobalPosition;
 	}
 
 	public virtual void SetShieldRotation(float rotationAngle)
@@ -53,9 +71,7 @@ public partial class BaseShield : CharacterBody2D
 	// Offset logic (if needed)
 	public void SetShieldOffset(Vector2 ownerPosition)
 	{
-		float offsetDistance = 60; // Adjust this distance as needed
-		Vector2 offset = new Vector2(Mathf.Cos(Rotation), Mathf.Sin(Rotation)) * offsetDistance;
-		GlobalPosition = ownerPosition + offset;
+		GlobalPosition = ownerPosition;
 	}
 	
 
@@ -92,7 +108,9 @@ public partial class BaseShield : CharacterBody2D
 	public virtual void TakeDamage(int damage)
 	{
 		Durability -= damage;
-		if (Durability <= 0)
-			QueueFree();
+		if (Durability <= 0){
+			//QueueFree();
+		}
+
 	}
 }

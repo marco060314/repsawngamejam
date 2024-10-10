@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hjuj1v0fc4c6"
-path="res://.godot/imported/robotarmfishgunshoot.png-e4915837b42587755383801df2a1f4a2.ctex"
+uid="uid://cgtewsrrdy0et"
+path="res://.godot/imported/desert_ [fencesAndWalls].png-987923df70163883c70f1685d54e9f31.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/scripts/robotarmfishgunshoot.png"
-dest_files=["res://.godot/imported/robotarmfishgunshoot.png-e4915837b42587755383801df2a1f4a2.ctex"]
+source_file="res://assets/fantasy/fantasy_ [version 2.0]/desert_/desert_ [fencesAndWalls].png"
+dest_files=["res://.godot/imported/desert_ [fencesAndWalls].png-987923df70163883c70f1685d54e9f31.ctex"]
 
 [params]
 

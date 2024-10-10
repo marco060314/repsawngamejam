@@ -7,13 +7,10 @@ public partial class Entity : CharacterBody2D
 	protected Vector2 position;
 	protected Vector2 velocity;
 	protected float rotation;
-
-	private bool hit;
-
-	[Export] protected float speed;
-	[Export] protected float friction;
-	[Export] protected float acceleration;
-	[Export] protected float health;
+	protected float speed;
+	protected float friction;
+	protected float acceleration;
+	protected float health;
 
 	protected Entity(float speed, float friction, float acceleration, float health){
 		this.speed = speed;
@@ -21,19 +18,22 @@ public partial class Entity : CharacterBody2D
 		this.acceleration = acceleration;
 		this.health = health;
 		direction = new Vector2(0, 0);
-		hit = false;
 	}
 
 	public void updateDirection(Vector2 direction){
 		this.direction = direction;
 	}
 
-	public void Hit(bool hit, float damage){
-		this.hit = hit;
-		if (this.hit == true){
-			health -= damage;
-			this.hit = false;
+	public void Damage(float damage){
+		health-=damage;
+		if(health<=0){
+			handleDeath();
+			QueueFree();
 		}
+	}
+
+	public virtual void handleDeath(){
+		GD.Print("inside handleDeath()::Entity");
 	}
 
 	public override void _PhysicsProcess(double delta){
@@ -65,7 +65,7 @@ public partial class Entity : CharacterBody2D
 		if (collision != null)
 		{
 			velocity = Vector2.Zero;
-			GD.Print((Name), " collided with ", ((Node)collision.GetCollider()).Name);
+			// GD.Print((Name), " collided with ", ((Node)collision.GetCollider()).Name);
 		}
 
 		Rotation = rotation;
