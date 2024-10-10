@@ -13,7 +13,6 @@ public partial class Background : Node2D
 		Input.SetCustomMouseCursor(arrow,Input.CursorShape.Arrow);
 		GetNode<Round>("Camera/Control/GridContainer/VBoxContainer/HBoxContainer/Round").signalNewRound();
 		soundManager=GetNode<SoundManager>("SoundManager");
-		GetNode<AudioStreamPlayer>("BackgroundMusic").Play(); //hopefully this will stop after going to main menu?
 		soundManager.playSound(Sound.GAME_START,0f,1);
 	}
 
