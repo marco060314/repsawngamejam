@@ -7,10 +7,10 @@ public partial class Entity : CharacterBody2D
 	protected Vector2 position;
 	protected Vector2 velocity;
 	protected float rotation;
-	[Export] protected float speed;
-	[Export] protected float friction;
-	[Export] protected float acceleration;
-	[Export] protected float health;
+	protected float speed;
+	protected float friction;
+	protected float acceleration;
+	protected float health;
 
 	protected Entity(float speed, float friction, float acceleration, float health){
 		this.speed = speed;
@@ -27,8 +27,13 @@ public partial class Entity : CharacterBody2D
 	public void Damage(float damage){
 		health-=damage;
 		if(health<=0){
+			handleDeath();
 			QueueFree();
 		}
+	}
+
+	public virtual void handleDeath(){
+		GD.Print("inside handleDeath()::Entity");
 	}
 
 	public override void _PhysicsProcess(double delta){

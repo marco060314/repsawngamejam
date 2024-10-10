@@ -40,7 +40,6 @@ public partial class Bullet : Area2D
 	}
 
 	public void onBodyEntered(Node2D node){
-		GD.Print(node.GetType());
 		if(hitsPlayers&&node.GetType()==typeof(Player)){
 			((Player)node).damage(Damage);
 			QueueFree();

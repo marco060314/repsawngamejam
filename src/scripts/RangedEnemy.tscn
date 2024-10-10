@@ -18,10 +18,6 @@ script = ExtResource("1_ufyr0")
 shootrange = NodePath("ShootRange")
 runawayrange = NodePath("RunAwayRange")
 gunScene = ExtResource("2_r6qai")
-speed = 400.0
-friction = 15.0
-acceleration = 23.0
-health = 50.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708

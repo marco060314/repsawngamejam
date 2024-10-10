@@ -19,7 +19,8 @@ public partial class RangedEnemy : Enemy
 
 	private Gun gun;
 
-	public RangedEnemy() : base(50f, 15f, 23f, 50f)	{
+	public RangedEnemy() : base(50f, 15f, 23f, 30f)	{
+		GD.Print("rangedhealth: "+health);
 		Position = new Vector2(960, 720);
 	}
 	public override void _Ready()

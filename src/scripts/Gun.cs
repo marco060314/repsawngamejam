@@ -65,10 +65,12 @@ public partial class Gun : Node2D
 			bullet.hitsPlayers=!isPlayer;
 			if(isPlayer){
 				bullet.Modulate=new Color(0,255,0);
+				bullet.Damage=10;
 			}
 			else{
 				bullet.Modulate=new Color(255,0,0);
-				bullet.Speed/=2;
+				bullet.Speed/=3;
+				bullet.Damage=3;
 			}
 	   	 	bullet.GlobalPosition = GlobalPosition + direction * 30;
 	   	 	bullet.SetDirection(direction);

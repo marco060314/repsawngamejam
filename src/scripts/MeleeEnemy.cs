@@ -8,7 +8,7 @@ public partial class MeleeEnemy : Enemy{
 
 	private Vector2 velocity;
 
-	public MeleeEnemy() : base(100f, 15f, 23f, 50f) {
+	public MeleeEnemy() : base(100f, 15f, 23f, 10f) {
 		Position = new Vector2(960, 540);
 	}
 	public override void _Ready()

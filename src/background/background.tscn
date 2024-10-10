@@ -484,6 +484,9 @@ size_flags_vertical = 3
 text = "Round: "
 script = ExtResource("15_66lgg")
 
+[node name="RoundTimer" type="Timer" parent="Camera/Control/GridContainer/VBoxContainer/HBoxContainer/Round"]
+wait_time = 2.0
+
 [node name="HBoxContainer2" type="HBoxContainer" parent="Camera/Control/GridContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -520,4 +523,11 @@ script = ExtResource("19_th62v")
 [connection signal="timeout" from="Player2/InvinceFrames" to="Player2" method="onNotInvincible"]
 [connection signal="gameOver" from="Camera/Control/Stats/P1Stats/HHealth/VBoxContainer/P1HealthBar" to="." method="gameOver"]
 [connection signal="gameOver" from="Camera/Control/Stats/P2Stats/HHealth/VBoxContainer/P2HealthBar" to="." method="gameOver"]
-[connection signal="timeout" from="EnemySpawner/SpawnTimer" to="EnemySpawner" method="onTimerTimeout"]
+[connection signal="newRound" from="Camera/Control/GridContainer/VBoxContainer/HBoxContainer/Round" to="EnemySpawner" method="newRound"]
+[connection signal="timeout" from="Camera/Control/GridContainer/VBoxContainer/HBoxContainer/Round/RoundTimer" to="Camera/Control/GridContainer/VBoxContainer/HBoxContainer/Round" method="onRoundTimerTimeout"]
+[connection signal="signalNewRound" from="Camera/Control/GridContainer/VBoxContainer/HBoxContainer2/EnemiesLeft" to="Camera/Control/GridContainer/VBoxContainer/HBoxContainer/Round" method="signalNewRound"]
+[connection signal="allEnemies" from="EnemySpawner" to="Camera/Control/GridContainer/VBoxContainer/HBoxContainer2/EnemiesLeft" method="newRoundEnemies"]
+[connection signal="enemyDied" from="EnemySpawner" to="Camera/Control/ScoreStats/P1Score" method="enemyDied"]
+[connection signal="enemyDied" from="EnemySpawner" to="Camera/Control/GridContainer/VBoxContainer/HBoxContainer2/EnemiesLeft" method="enemyDied"]
+[connection signal="enemySpawned" from="EnemySpawner" to="Camera/Control/GridContainer/VBoxContainer/HBoxContainer2/EnemiesLeft" method="enemySpawned"]
+[connection signal="timeout" from="EnemySpawner/SpawnTimer" to="EnemySpawner" method="onSpawnTimerTimeout"]

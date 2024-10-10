@@ -12,6 +12,13 @@ public partial class Enemy : Entity {
 		base._Ready();
 	}
 
+	public override void handleDeath(){
+		GD.Print("inside handleDeath()::Enemy");
+		if(GetParent() is EnemySpawner){
+			((EnemySpawner)GetParent()).died();
+		}
+	}
+
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta) {
 		if (health <= 0){
