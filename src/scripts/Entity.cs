@@ -24,7 +24,7 @@ public partial class Entity : CharacterBody2D
 		this.direction = direction;
 	}
 
-	public void Damage(float damage){
+	public virtual void Damage(float damage){
 		health-=damage;
 		if(health<=0){
 			handleDeath();
