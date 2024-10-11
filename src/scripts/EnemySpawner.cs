@@ -6,7 +6,7 @@ public partial class EnemySpawner : Node2D
 	// set up all globals
 	private PackedScene[] enemyList = new PackedScene[]
 	{
-		(PackedScene)GD.Load("res://src/scripts/MeleeEnemy.tscn"),
+		(PackedScene)GD.Load("res://src/scripts/FlockingEnemy.tscn"),
 		(PackedScene)GD.Load("res://src/scripts/RangedEnemy.tscn")
 	};
 
@@ -52,18 +52,8 @@ public partial class EnemySpawner : Node2D
 	}
 
 	public void spawnEnemy(){
-		toSpawn--;
-		EmitSignal(SignalName.enemySpawned);
 
 		int randomEnemyIndex = random.Next(enemyList.Length);
-		PackedScene selectedEnemy = enemyList[randomEnemyIndex];
-		
-		// create an instance of the enemy
-		Node instance = selectedEnemy.Instantiate();
-		Player[] players=new Player[2];
-		players[0]=GetParent().GetNode<Player>("Player1");
-		players[1]=GetParent().GetNode<Player>("Player2");
-		((Enemy)instance).targets=players;
 		
 		// select the position of the enemy at random. Base it upon the player's location to avoid
 		// unfair spawning.
@@ -91,9 +81,41 @@ public partial class EnemySpawner : Node2D
 		GD.Print("Enemy Spawned at: ("+randomX+","+randomY+")");
 		//GD.Print("Difference Between Them: ("+randomX+","+randomY+")")
 		// set the randomized position
+
+		PackedScene selectedEnemy = enemyList[randomEnemyIndex];
 		Vector2 randomPosition = new Vector2(randomX, randomY);
-		((Node2D)instance).Position = (randomPosition);
+
+		if(randomEnemyIndex==0){//flocking
+			int flockCount=random.Next(1,Math.Min(toSpawn+1,maxFlockSize()));
+			for(int i=0; i<flockCount; i++){
+				createEnemy(selectedEnemy,randomPosition);
+			}
+		}
+		else{//ranged
+			createEnemy(selectedEnemy,randomPosition);
+		}
+	}
+
+	public int maxFlockSize(){
+		return 5;
+	}
+
+	public void createEnemy(PackedScene selectedEnemy,Vector2 position){
+		if(toSpawn==0) return;
+		toSpawn--;
+		// create an instance of the enemy
+		Node instance = selectedEnemy.Instantiate();
+		Player[] players=new Player[2];
+		players[0]=GetParent().GetNode<Player>("Player1");
+		players[1]=GetParent().GetNode<Player>("Player2");
+		((Enemy)instance).targets=players;
+
+		// implement slightly random positions!
+		int range=50;
+		position+=new Vector2(random.Next(--range,range),random.Next(--range,range));
+		((Node2D)instance).Position = position;
 		
+		EmitSignal(SignalName.enemySpawned);
 		// add the enemy to the scene
 		AddChild(instance);
 	}
