@@ -27,7 +27,7 @@ public partial class Player : Entity {
 	private Timer invincibilityFrames;
 	private bool damagable;
 
-	private const float LINE_LIFETIME=0.2f;
+	private const float LINE_LIFETIME=0.05f;
 
 	[Signal]
 	public delegate void onDamageEventHandler(double damageDx);

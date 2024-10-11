@@ -68,7 +68,7 @@ public partial class Gun : Node2D
 			var bullet = BulletScene.Instantiate<Bullet>();
 			bullet.hitsPlayers=!isPlayer;
 			if(isPlayer){
-				bullet.Modulate=new Color(255,255,0);
+				bullet.Modulate=new Color(0,0,0,0);
 				bullet.Speed*=2.5f;
 				bullet.Damage=10;
 				Background.soundManager.playSound(Sound.PLAYER_SHOOT,0,1);

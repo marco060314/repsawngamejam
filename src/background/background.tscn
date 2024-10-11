@@ -398,14 +398,6 @@ size_flags_vertical = 3
 text = "Enemies Left: "
 script = ExtResource("16_2ursw")
 
-[node name="ColorRect" type="ColorRect" parent="Camera"]
-z_index = -10
-offset_left = -1037.0
-offset_top = -610.0
-offset_right = 1014.0
-offset_bottom = 585.0
-color = Color(0.360784, 0.411765, 0.623529, 1)
-
 [node name="Layer0" type="TileMapLayer" parent="."]
 z_index = -2
 texture_filter = 1
@@ -416,7 +408,7 @@ tile_set = SubResource("TileSet_1h4hp")
 [node name="EnemySpawner" type="Node2D" parent="." node_paths=PackedStringArray("players")]
 z_index = -1
 script = ExtResource("17_gbu0d")
-players = [NodePath("../Player1"), NodePath("../Player2")]
+players = []
 
 [node name="SpawnTimer" type="Timer" parent="EnemySpawner"]
 autostart = true

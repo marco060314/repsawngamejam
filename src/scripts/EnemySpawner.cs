@@ -16,7 +16,7 @@ public partial class EnemySpawner : Node2D
 	private float randAngle;
 	private  Random random = new Random();
 	public float spawnTimer = 0.3f;
-	private int flockSize;
+	private int flockSize=5;
 	private int toSpawn;
 
 
@@ -48,13 +48,13 @@ public partial class EnemySpawner : Node2D
 		Difficulty d=Background.difficulty;
 		int k;
 		if(d==Difficulty.EASY){
-			k=1;
+			k=5;
 		}
 		else if(d==Difficulty.MEDIUM){
-			k=2;
+			k=10;
 		}
 		else{
-			k=3;
+			k=15;
 		}
 
 		toSpawn=round*k;
@@ -65,10 +65,7 @@ public partial class EnemySpawner : Node2D
 		EmitSignal(SignalName.allEnemies,toSpawn);
 	}
 
-	public void spawnEnemy(){
-
-
-
+	public void spawnEnemy() {
 		//int randomEnemyIndex = random.Next(enemyList.Length);
 		
 		Random random = new Random();
