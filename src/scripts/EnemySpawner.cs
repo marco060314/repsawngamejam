@@ -39,7 +39,12 @@ public partial class EnemySpawner : Node2D
 		spawnEnemy();
 	}
 
-	public void newRound(int round) { // called after enemies are killed
+
+
+	public void newRound(int round) {
+		//EmitSignal(SignalName.allEnemies,toSpawn);
+		//EmitSignal("upgrade_triggered");
+
 		Difficulty d=Background.difficulty;
 		int k;
 		if(d==Difficulty.EASY){
@@ -62,8 +67,13 @@ public partial class EnemySpawner : Node2D
 
 	public void spawnEnemy(){
 
-		int randomEnemyIndex = random.Next(enemyList.Length);
+
+
+		//int randomEnemyIndex = random.Next(enemyList.Length);
 		
+		Random random = new Random();
+		int randomChance = random.Next(10);
+		int randomEnemyIndex = randomChance == 0 ? 1 : 0;
 		
 		// select the position of the enemy at random. Base it upon the player's location to avoid
 		// unfair spawning.

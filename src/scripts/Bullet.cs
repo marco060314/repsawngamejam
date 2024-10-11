@@ -44,9 +44,17 @@ public partial class Bullet : Area2D
 			((Player)node).damage(Damage);
 			QueueFree();
 		}
-		if(!hitsPlayers&&node is Enemy){
+		else if (!hitsPlayers && node is Enemy)
+		{
 			((Entity)node).Damage(Damage);
 			QueueFree();
 		}
+		// Check if the bullet hits a shield
+		else if (node is BaseShield)
+		{
+			//((BaseShield)node).AbsorbDamage(Damage); // Call a method to handle shield damage
+			QueueFree(); // Remove the bullet after hitting the shield
+		}
+		
 	}
 }
