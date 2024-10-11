@@ -18,6 +18,7 @@ public partial class FlockingEnemy : Enemy
 	// Lists to store flockmates and targets
 	private List<FlockingEnemy> flockmates = new List<FlockingEnemy>();
 	private Player closestPlayer;
+	
 
 	public FlockingEnemy() : base(100f, 15f, 23f, 10f)
 	{
@@ -62,6 +63,9 @@ public partial class FlockingEnemy : Enemy
 			{
 				player.damage(3f);
 				Rotation += Mathf.Pi;
+				velocity = -velocity;
+			}else if (collider is BaseShield shield)
+			{
 				velocity = -velocity;
 			}
 		}

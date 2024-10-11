@@ -53,7 +53,10 @@ public partial class EnemySpawner : Node2D
 
 	public void spawnEnemy(){
 
+
+
 		int randomEnemyIndex = random.Next(enemyList.Length);
+		
 		
 		// select the position of the enemy at random. Base it upon the player's location to avoid
 		// unfair spawning.
