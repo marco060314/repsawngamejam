@@ -67,6 +67,7 @@ public partial class FlockingEnemy : Enemy
 			}else if (collider is BaseShield shield)
 			{
 				velocity = -velocity;
+				((EnemySpawner)GetParent()).blockEnemy();
 			}
 		}
 	}

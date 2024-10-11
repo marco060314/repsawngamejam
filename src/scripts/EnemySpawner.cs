@@ -22,6 +22,7 @@ public partial class EnemySpawner : Node2D
 
 	[Signal] public delegate void enemySpawnedEventHandler();
 	[Signal] public delegate void enemyDiedEventHandler();
+	[Signal] public delegate void blockedEnemyEventHandler();
 	[Signal] public delegate void allEnemiesEventHandler(int numEnemies);
 
 	public override void _Ready(){
@@ -128,5 +129,9 @@ public partial class EnemySpawner : Node2D
 	public void died() {
 		GD.Print("inside died()::EnemySpawner");
 		EmitSignal(SignalName.enemyDied);
+	}
+
+	public void blockEnemy(){
+		EmitSignal(SignalName.blockedEnemy);
 	}
 }

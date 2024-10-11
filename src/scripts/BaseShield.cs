@@ -27,7 +27,6 @@ public partial class BaseShield : CharacterBody2D
 		this.Scale = new Vector2(Size, Size);
 		// Initialize Area2D for detecting overlapping bodies
 		detectionArea = GetNode<Area2D>("Area2D");
-		detectionArea.Connect("body_entered", new Callable(this, nameof(OnBodyEntered)));
 	}
 
 	public void LockToOwner(Node2D ownerNode)
@@ -92,16 +91,6 @@ public partial class BaseShield : CharacterBody2D
 					characterBodyTarget.Velocity += pushDirection * PushForce;
 				}
 			}
-		}
-	}
-
-	// Called when an overlapping body enters the Area2D
-	private void OnBodyEntered(Node2D body)
-	{
-		if (body is Entity target && target != owner)
-		{
-			Vector2 pushDirection = (target.GlobalPosition - GlobalPosition).Normalized();
-			// Apply push effect immediately or flag for further interaction
 		}
 	}
 
