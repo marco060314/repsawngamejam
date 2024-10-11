@@ -15,6 +15,6 @@ public partial class Title2 : Sprite2D
 		if(Position.X<=801){
 			Position=new Vector2(801,Position.Y);
 		}
-		Translate(new Vector2(-100*(float)delta,0));
+		Translate(new Vector2(-200*(float)delta,0));
 	}
 }

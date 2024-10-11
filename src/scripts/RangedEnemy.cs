@@ -35,7 +35,7 @@ public partial class RangedEnemy : Enemy
 
 	public override void _PhysicsProcess(double delta)
 	{
-		closestDistance = 10000;
+		closestDistance = 100000000;
 		foreach (Player p in targets){
 			if (p.getPosition().DistanceTo(Position) < closestDistance)
 			{

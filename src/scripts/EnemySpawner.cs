@@ -9,16 +9,16 @@ public partial class EnemySpawner : Node2D
 		(PackedScene)GD.Load("res://src/scripts/FlockingEnemy.tscn"),
 		(PackedScene)GD.Load("res://src/scripts/RangedEnemy.tscn")
 	};
+	[Export] Player[] players;
+	private Vector2 center; // average position of players
 
-	private Vector2 center=new Vector2(1000,500);
-
-	[Export] public float distance = 100.0f; // this determines how far away we want the enemies spawning from the player
-	private Player closestPlayer;
-	private float closestDistance;
+	[Export] public float distance = 1600.0f; // this determines how far away we want the enemies spawning from the player
+	private float randAngle;
 	private  Random random = new Random();
 	public float spawnTimer = 0.3f;
-	
+	private int flockSize;
 	private int toSpawn;
+
 
 	[Signal] public delegate void enemySpawnedEventHandler();
 	[Signal] public delegate void enemyDiedEventHandler();
@@ -27,6 +27,10 @@ public partial class EnemySpawner : Node2D
 	public override void _Ready(){
 		Timer timer = GetNode<Timer>("SpawnTimer");
 		timer.WaitTime = spawnTimer;
+		flockSize = 5;
+		center = new Vector2(0, 0);
+		center.X = (players[0].GlobalPosition.X + players[1].GlobalPosition.X) / 2;
+		center.Y = (players[0].GlobalPosition.Y + players[1].GlobalPosition.Y) / 2;
 	}
 		
 	public void onSpawnTimerTimeout(){
@@ -35,7 +39,7 @@ public partial class EnemySpawner : Node2D
 		spawnEnemy();
 	}
 
-	public void newRound(int round) {
+	public void newRound(int round) { // called after enemies are killed
 		Difficulty d=Background.difficulty;
 		int k;
 		if(d==Difficulty.EASY){
@@ -47,13 +51,16 @@ public partial class EnemySpawner : Node2D
 		else{
 			k=3;
 		}
+
 		toSpawn=round*k;
+		if (round % 3 == 0){
+			flockSize++;
+		}
+
 		EmitSignal(SignalName.allEnemies,toSpawn);
 	}
 
 	public void spawnEnemy(){
-
-
 
 		int randomEnemyIndex = random.Next(enemyList.Length);
 		
@@ -61,26 +68,14 @@ public partial class EnemySpawner : Node2D
 		// select the position of the enemy at random. Base it upon the player's location to avoid
 		// unfair spawning.
 
-		float playerX = center.X;
-		float playerY = center.Y;
 		
 		float randomX = 0.0f;
 		float randomY = 0.0f;
-		
-		// repeat if x val is too close to player
-		do{
-			// to tweak valued: GD.Randomf() * (max - min) + min
-			randomX = (float)(random.NextDouble() * (playerX+distance - (playerX-distance)) + (playerX-distance));
-			
-		}while(randomX < playerX+(distance/2) && randomX > playerX-(distance/2));
-		
-		// repeat if y val is too  close to player
-		do{
-			randomY = (float)(random.NextDouble() * (playerY+distance - (playerY-distance)) + (playerY-distance));
-		
-		}while(randomY > playerY-(distance/2) && randomY < playerY+(distance/2));
-		
-		GD.Print("Player Position: ("+playerX+","+playerY+")");
+
+		randAngle = (float)random.NextDouble() * 2 * Mathf.Pi;
+
+		randomX = (float) Mathf.Cos(randAngle) * distance + center.X;
+		randomY = (float) Mathf.Sin(randAngle) * distance + center.Y;
 		GD.Print("Enemy Spawned at: ("+randomX+","+randomY+")");
 		//GD.Print("Difference Between Them: ("+randomX+","+randomY+")")
 		// set the randomized position
@@ -100,7 +95,7 @@ public partial class EnemySpawner : Node2D
 	}
 
 	public int maxFlockSize(){
-		return 5;
+		return flockSize;
 	}
 
 	public void createEnemy(PackedScene selectedEnemy,Vector2 position){
