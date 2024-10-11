@@ -11,7 +11,7 @@ public class SoundExtensions{
             path="res://assets/audio/LaserShoot.wav";
         }
         else if(s==Sound.PLAYER_SHOOT){
-            path="res://assets/audio/BubblePop.mp3";
+            path="res://assets/audio/gunshot.mp3";
         }
         else if(s==Sound.GAME_OVER){
             path="res://assets/audio/GameOver1.wav";

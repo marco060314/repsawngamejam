@@ -11,6 +11,10 @@ public partial class Gun : Node2D
 	protected Entity owner;
 	protected Player p;
 	private bool isPlayer = false;
+
+	[Signal]
+	public delegate void shakeEventHandler();
+
 	public override void _Ready()
 	{
 		this.TopLevel = true;
@@ -64,9 +68,11 @@ public partial class Gun : Node2D
 			var bullet = BulletScene.Instantiate<Bullet>();
 			bullet.hitsPlayers=!isPlayer;
 			if(isPlayer){
-				bullet.Modulate=new Color(0,255,0);
+				bullet.Modulate=new Color(255,255,0);
+				bullet.Speed*=2.5f;
 				bullet.Damage=10;
 				Background.soundManager.playSound(Sound.PLAYER_SHOOT,0,1);
+				((Player)GetParent()).gunFired(direction);
 			}
 			else{
 				bullet.Modulate=new Color(255,0,0);

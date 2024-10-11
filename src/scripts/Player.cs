@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public partial class Player : Entity {
 	private const float TOLERANCE = 0.05f; // Controller deadzone
@@ -25,13 +27,18 @@ public partial class Player : Entity {
 	private Timer invincibilityFrames;
 	private bool damagable;
 
+	private const float LINE_LIFETIME=0.2f;
+
 	[Signal]
 	public delegate void onDamageEventHandler(double damageDx);
 	[Signal]
 	public delegate void shakeEventHandler();
 
+	Dictionary<Line2D,float> lines;
+
 
 	public Player() : base(300f, 15f, 23f, 100f) {
+		lines=new Dictionary<Line2D, float>();
 		// Initial setup of player properties
 	}
 
@@ -75,6 +82,15 @@ public partial class Player : Entity {
 	}
 
 	public override void _PhysicsProcess(double delta) {
+		foreach (Line2D line in lines.Keys.ToList()){
+			if(lines[line]>0){
+				lines[line]-=(float)delta;
+			}
+			else{
+				lines.Remove(line);
+				line.QueueFree();
+			}
+		}
 		if (isPlayerOne) {
 			// Handle movement
 			direction = Input.GetVector("LEFT", "RIGHT", "UP", "DOWN");
@@ -132,7 +148,19 @@ public partial class Player : Entity {
 		Modulate=new Color(Modulate.R,Modulate.G,Modulate.B,100.0f/255);
 		damagable=false;
 		EmitSignal(SignalName.onDamage,delta);
-		EmitSignal(SignalName.shake);
+		EmitSignal(SignalName.shake,5000.0f);
+	}
+
+	public void gunFired(Vector2 direction){
+		EmitSignal(SignalName.shake,2000.0f);
+		Line2D line=new Line2D();
+		line.AddPoint(Position);
+		direction*=2000f;
+		line.Width=1f;
+		line.DefaultColor=new Color(1,1,1);
+		line.AddPoint(Position+direction);
+		lines.Add(line,LINE_LIFETIME);
+		GetParent().AddChild(line);
 	}
 
 	// Getter methods

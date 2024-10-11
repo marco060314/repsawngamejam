@@ -15,7 +15,7 @@ public partial class Camera : Camera2D
 	private FastNoiseLite fnl;
 	private Vector2 basePosition;
 	private const float ShakeTime=0.4f;
-	private const float ShakeAmount=5000.0f;
+	private float ShakeAmount=5000.0f;
 	private float screenShakeDelay;
 
 	public override void _Ready()
@@ -56,8 +56,9 @@ public partial class Camera : Camera2D
 		return fnl.GetNoise1D(GD.Randf()*screenShakeDelay)*ShakeAmount;
 	}
 
-	public void shake(){
+	public void shake(float ShakeAmount){
 		basePosition=GlobalPosition;
 		screenShakeDelay=ShakeTime;
+		this.ShakeAmount=ShakeAmount;
 	}
 }
